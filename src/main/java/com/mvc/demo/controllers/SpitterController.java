@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +56,7 @@ public class SpitterController {
 			if (!image.isEmpty()) {
 				validateImage(image);
 				saveImage(spitter.getId() + ".jpg", image); 
-				spitter.setProfile_image(Integer.toString(spitter.getId()));
+				spitter.setProfile_image("default");
 			}else {
 				spitter.setProfile_image("default");
 			}
@@ -63,12 +66,18 @@ public class SpitterController {
 		}
 		service.updateSpitter(spitter);
 		
-		return "redirect:/spitters/" + spitter.getUsername();
+		return "redirect:/app/home";
 	}
 
-	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
-	public String showSpitterProfile(@PathVariable String username, Model model) {
-		model.addAttribute(service.getSpitterByUsername(username));
+	@RequestMapping(value = "/profile")
+	public String showSpitterProfile(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			UserDetails userDetails =
+					 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute(service.getSpitterByUsername(userDetails.getUsername()));
+		}
+		
 		return "spitters/view";
 	}
 

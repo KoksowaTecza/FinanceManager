@@ -1,6 +1,9 @@
 package com.mvc.demo.domain;
 
+import java.sql.Blob;
+
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.mvc.demo.commons.domain.BaseEntity;
@@ -15,6 +18,7 @@ public class Spitter extends BaseEntity {
 	private String email;
 	private String profile_image;
 
+	
 	public String getProfile_image() {
 		return profile_image;
 	}

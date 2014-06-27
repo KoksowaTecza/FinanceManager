@@ -1,5 +1,7 @@
 drop table spitter;
 
+delete from spitter where id=103;
+
 create table spitter (
 	id number,
 	userFullName varchar2(30),

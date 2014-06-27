@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<c:url value="/static/css/style.css" />" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap.min.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/app/static/css/style.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/app/static/css/bootstrap.min.css" />" />
 <title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>
