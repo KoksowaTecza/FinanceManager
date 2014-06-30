@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,17 +19,37 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mvc.demo.domain.Spitter;
 import com.mvc.demo.services.SpitterService;
+import com.mvc.demo.services.UserAuthenticationProviderService;
 
 @Controller
 @RequestMapping(value = "/spitters")
 public class SpitterController {
 
 	private SpitterService service;
+	private Spitter spitterEntity;
+	private UserAuthenticationProviderService userAuthenticationProviderService;
 	
+	
+	@Inject
+	public void setUserAuthenticationProviderService(
+			UserAuthenticationProviderService userAuthenticationProviderService) {
+		this.userAuthenticationProviderService = userAuthenticationProviderService;
+	}
+
+	@Inject
+	public void setSpitterEntity(Spitter spitterEntity) {
+		this.spitterEntity = spitterEntity;
+	}
 
 	@Inject
 	public SpitterController(SpitterService service) {
 		this.service = service;
+	}
+	
+	@RequestMapping(value="/authenticate", method = RequestMethod.POST)
+	public String authenticateUser(@RequestParam String username, @RequestParam String password, Model model){
+		userAuthenticationProviderService.processUserAuthentication(username, password);
+		return "redirect:/app/spittle/"+username;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, params = "new")
@@ -55,8 +71,8 @@ public class SpitterController {
 		try {
 			if (!image.isEmpty()) {
 				validateImage(image);
-				saveImage(spitter.getId() + ".jpg", image); 
-				spitter.setProfile_image("default");
+				saveImage(spitter.getUsername()+".jpg", image);
+				spitter.setProfile_image(spitter.getUsername());
 			}else {
 				spitter.setProfile_image("default");
 			}
@@ -70,16 +86,10 @@ public class SpitterController {
 	}
 
 	@RequestMapping(value = "/profile")
-	public String showSpitterProfile(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			UserDetails userDetails =
-					 (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			model.addAttribute(service.getSpitterByUsername(userDetails.getUsername()));
-		}
-		
+	public String showSpitterProfile(Model model) {	
 		return "spitters/view";
 	}
+	
 
 	private void validateImage(MultipartFile image) throws IIOException {
 		if (!image.getContentType().equals("image/jpeg")) {
@@ -90,7 +100,7 @@ public class SpitterController {
 	private void saveImage(String filename, MultipartFile image)
 			throws IIOException {
 		try {
-			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/target/mvc.demo-0.0.1-SNAPSHOT/static/avatars/" + filename);
+			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/src/main/webapp/static/avatars/" + filename);
 			FileUtils.writeByteArrayToFile(file, image.getBytes());
 		} catch (IOException e) {
 			throw new IIOException("Unable to save image", e);

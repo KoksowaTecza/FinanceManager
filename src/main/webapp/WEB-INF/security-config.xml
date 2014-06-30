@@ -17,12 +17,22 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider
-			user-service-ref="userService">
+			user-service-ref="spitterService">
 		</security:authentication-provider>
 	</security:authentication-manager>
-
-	<security:user-service id="userService">
-		<security:user name="habuma" password="letmein" authorities="ROLE_SPITTER,ROLE_ADMIN" />
-	</security:user-service>
+	
+	
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="spitterService" />
+		<property name="hideUserNotFoundExceptions" value="false" />
+	</bean>
+	
+	<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg>
+                <ref bean="daoAuthenticationProvider" />
+        </constructor-arg>
+   </bean>
+	
 
 </beans>

@@ -1,4 +1,5 @@
 drop table spitter;
+SELECT * FROM V$VERSION;
 
 delete from spitter where id=103;
 

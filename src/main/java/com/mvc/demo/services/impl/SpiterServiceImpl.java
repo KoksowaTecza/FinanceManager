@@ -1,5 +1,11 @@
 package com.mvc.demo.services.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,10 +41,19 @@ public class SpiterServiceImpl implements SpitterService, UserDetailsService {
 		
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
+	/**
+	 * construct userDetails instance required by spring security
+	 */
+	public UserDetails loadUserByUsername(String username){
+		Spitter spitter = spitterDao.getSpitterByUsername(username);
 		
-		return null;
+		if(spitter == null ){
+			throw new UsernameNotFoundException("User for username: "+username+" not found");
+		}
+		
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
+		
+		return new User(spitter.getUsername(), spitter.getPassword(), authorities);
 	}
 }

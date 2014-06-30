@@ -1,10 +1,10 @@
 package com.mvc.demo.domain;
 
-import java.sql.Blob;
 
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.mvc.demo.commons.domain.BaseEntity;
 
@@ -12,12 +12,15 @@ import com.mvc.demo.commons.domain.BaseEntity;
 @Table(name="spitter")
 public class Spitter extends BaseEntity {
 	private static final long serialVersionUID = 5351079363353906417L;
+	@Size(min=3, max=50, message="Your full name must be between 3 and 50 characters long.")
 	private String userFullName;
+	@Size(min=3, max=20, message="Username must be between 3 and 20 characters long.")
+	@Pattern(regexp="^[a-zA-Z0-9]+$", message="Username must be alphanumeric with no spaces")
 	private String username;
+	@Size(min=6, max=20, message="The password must be at least 6 characters long.")
 	private String password;
 	private String email;
 	private String profile_image;
-
 	
 	public String getProfile_image() {
 		return profile_image;

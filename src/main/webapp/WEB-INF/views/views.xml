@@ -16,11 +16,16 @@
 	<definition name="spitters/edit" extends="base.definition">
 		<put-attribute name="title" value="" />
 		<put-attribute name="content" value="/WEB-INF/views/jsp/content/edit.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menu.jsp" role="ROLE_SPITTER"/>
+		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/signUpForm.jsp" />
 	</definition>
 	<definition name="spitters/view" extends="base.definition">
 		<put-attribute name="title" value="" />
 		<put-attribute name="content" value="/WEB-INF/views/jsp/content/spitterProfile.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menu.jsp" />
+	</definition>
+	<definition name="userSpittles/view" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="content" value="/WEB-INF/views/jsp/content/userSpittles.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menu.jsp" />
 	</definition>
 </tiles-definitions>

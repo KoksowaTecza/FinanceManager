@@ -2,7 +2,19 @@ body {
 	background-image: url(images/background.png);
 	background-repeat: repeat-x;
 }
-
+.breadcrumb {
+	background-color: #0353ac;
+	font-weight: bold;
+	margin-top:10px;
+	margin-bottom: 20px;
+}
+.breadcrumb a{
+	color:#EEEEEE;
+	font-weight: bold;
+}
+.breadcrumb>.active {
+	color: #f6ca19;
+}
 #content {
 	width: 100%;
 	min-height: 450px;
@@ -16,6 +28,19 @@ body {
 	font-style: normal;
 	border-radius: 7px 7px 7px 7px;
 	padding: 30px 30px 70px 30px;
+}
+
+#content h2 {
+	color: #f6ca19;
+	font-weight: bold;
+}
+
+#content .form {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+#content .error{
+	color:red;
 }
 
 #menu {
@@ -69,4 +94,7 @@ body {
 
 #menu_button {
 	margin-top: 20px;
+}
+#menu_button a{
+	font-weight: bold;
 }
