@@ -19,6 +19,7 @@ public class Spittle extends BaseEntity{
 	private static final long serialVersionUID = -4239826455139901340L;
 	private Date when;
 	private String text;
+	private Spitter spitter;
 	public Date getWhen() {
 		return when;
 	}

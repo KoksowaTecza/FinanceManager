@@ -5,6 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="<c:url value="/app/static/css/bootstrap.min.css" />" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/app/static/css/style.css" />" />
+<script src="<c:url value="/app/static/js/jquery-1.11.1.min.js" />"></script>
+<script src="<c:url value="/app/static/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/app/static/js/script.js" />"></script>
 <title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>

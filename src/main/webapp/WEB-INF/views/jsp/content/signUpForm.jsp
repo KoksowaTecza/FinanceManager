@@ -18,7 +18,7 @@
 		<div class="checkbox">
 			<label>
 			 <input type="checkbox" id="remeber_me"
-				name="_spring_security_remember_me" /> Rember me
+				name="_spring_security_remember_me" /> Remeber me
 			</label>
 		</div>
 		<button name="commit" type="submit" class="btn btn-primary"/>Sign in</button> <a href="">Forgot</a>

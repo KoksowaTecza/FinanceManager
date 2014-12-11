@@ -98,3 +98,11 @@ body {
 #menu_button a{
 	font-weight: bold;
 }
+#addSpittle .modal-body{
+	background-color: #0353ac;
+}
+
+#addSpittle #myModalLabel{
+	    color: #f6ca19;
+    font-weight:bold;
+}

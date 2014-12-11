@@ -20,7 +20,7 @@ public class SpitterJpaDao extends GenericJpaDao<Spitter, Long> implements Spitt
 		
 		Spitter spitter = null;
 		
-		Query query = getEntityManager().createQuery("select u from " + getPeristenceClass().getName() + " u where u.username = :username").setParameter("username", username);
+		Query query = getEntityManager().createQuery("from " + getPeristenceClass().getName() + " u where u.username = :username").setParameter("username", username);
 		
 		try {
 			spitter = (Spitter)query.getSingleResult();

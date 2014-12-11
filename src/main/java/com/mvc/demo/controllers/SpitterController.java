@@ -48,8 +48,9 @@ public class SpitterController {
 	
 	@RequestMapping(value="/authenticate", method = RequestMethod.POST)
 	public String authenticateUser(@RequestParam String username, @RequestParam String password, Model model){
-		userAuthenticationProviderService.processUserAuthentication(username, password);
-		return "redirect:/app/spittle/"+username;
+		if(userAuthenticationProviderService.processUserAuthentication(username, password))
+			return "redirect:/app/spittle/"+username;
+		return "redirect:/app/home/";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, params = "new")

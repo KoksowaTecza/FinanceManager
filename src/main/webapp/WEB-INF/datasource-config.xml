@@ -10,8 +10,8 @@
 		destroy-method="close">
 		<property name="connectionCachingEnabled" value="true" />
 		<property name="URL" value="jdbc:oracle:thin:@localhost:1521:XE" />
-		<property name="user" value="jee_demo" />
-		<property name="password" value="jee_demo" />
+		<property name="user" value="mvc_demo" />
+		<property name="password" value="mvc_demo" />
 	</bean>
 
 	<bean id="entityManagerFactory"
