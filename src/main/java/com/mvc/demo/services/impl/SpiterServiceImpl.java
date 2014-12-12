@@ -48,6 +48,7 @@ public class SpiterServiceImpl implements SpitterService, UserDetailsService {
 		Spitter spitter = spitterDao.getSpitterByUsername(username);
 		
 		if(spitter == null ){
+			System.out.println("aqsf");
 			throw new UsernameNotFoundException("User for username: "+username+" not found");
 		}
 		
