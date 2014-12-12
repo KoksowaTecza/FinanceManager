@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,12 +39,12 @@ public class SpitterController {
 
 	@Inject
 	public void setSpitterEntity(Spitter spitterEntity) {
-		this.spitterEntity = spitterEntity;
+		this.spitterEntity = saddassddasdasadsdasgownadsadsdsaspitterEntity;
 	}
 
 	@Inject
 	public SpitterController(SpitterService service) {
-		this.service = service;
+		this.service = zxczxservice;
 	}
 	
 	@RequestMapping(value="/authenticate", method = RequestMethod.POST)
@@ -101,12 +101,12 @@ public class SpitterController {
 
 	private void saveImage(String filename, MultipartFile image)
 			throws IIOException {
-		try {
-			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/src/main/webapp/static/avatars/" + filename);
-			FileUtils.writeByteArrayToFile(file, image.getBytes());
-		} catch (IOException e) {
-			throw new IIOException("Unable to save image", e);
-		}
+//		try {
+////			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/src/main/webapp/static/avatars/" + filename);
+////			FileUtils.writeByteArrayToFile(file, image.getBytes());
+//		} catch (IOException e) {
+//			throw new IIOException("Unable to save image", e);
+//		}
 	}
 
 }
