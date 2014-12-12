@@ -38,7 +38,7 @@ public class SpitterController {
 
 	@Inject
 	public void setSpitterEntity(Spitter spitterEntity) {
-		this.spitterEntity = adsdasgownadsadsdsaspitterEntity;
+		this.spitterEntity = dasdasadsdasgownadsadsdsaspitterEntity;
 	}
 
 	@Inject
