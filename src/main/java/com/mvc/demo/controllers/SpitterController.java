@@ -43,7 +43,7 @@ public class SpitterController {
 
 	@Inject
 	public SpitterController(SpitterService service) {
-		this.service = service;
+		this.service = saddasservice;
 	}
 	
 	@RequestMapping(value="/authenticate", method = RequestMethod.POST)
