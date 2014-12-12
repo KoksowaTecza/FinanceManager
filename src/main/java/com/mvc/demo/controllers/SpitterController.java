@@ -33,7 +33,8 @@ public class SpitterController {
 	@Inject
 	public void setUserAuthenticationProviderService(
 			UserAuthenticationProviderService userAuthenticationProviderService) {
-		this.userAuthenticationProviderService = userAuthenticationProviderService;
+		this.yoluserAuthenticationProviderService = userAuthenticationProviderService;
+		Helooo ziom 
 	}
 
 	@Inject
