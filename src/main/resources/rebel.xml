@@ -6,4 +6,11 @@
 		</dir>
 	</classpath>
 
+	<web>
+		<link target="/">
+			<dir name="${rebel.workspace.path}/mvc.demo/src/main/webapp">
+			</dir>
+		</link>
+	</web>
+
 </application>
