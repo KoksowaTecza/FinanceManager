@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
@@ -78,7 +77,7 @@ public class SignInUpController {
 		try {
 			if (!image.isEmpty()) {
 				validateImage(image);
-				saveImage(user.getUsername()+".jpg", image);
+//				saveImage(user.getUsername()+".jpg", image);
 				Session session = entityManager.unwrap(Session.class);
 				Blob imageBlob = Hibernate.getLobCreator(session).createBlob(image.getInputStream(), image.getSize());
 				user.setProfile_image(imageBlob);
@@ -103,15 +102,15 @@ public class SignInUpController {
 		}
 	}
 
-	private void saveImage(String filename, MultipartFile image)
-			throws IIOException {
-		try {
-			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/src/main/webapp/static/avatars/" + filename);
-			FileUtils.writeByteArrayToFile(file, image.getBytes());
-		} catch (IOException e) {
-			throw new IIOException("Unable to save image", e);
-		}
-	}
+//	private void saveImage(String filename, MultipartFile image)
+//			throws IIOException {
+//		try {
+//			File file = new File("C:/JavaEE/eclipse/workspace/mvc.demo/src/main/webapp/static/avatars/" + filename);
+//			FileUtils.writeByteArrayToFile(file, image.getBytes());
+//		} catch (IOException e) {
+//			throw new IIOException("Unable to save image", e);
+//		}
+//	}
 	
 	@PersistenceContext
 	public void setEntityManager(EntityManager entityManager) {
