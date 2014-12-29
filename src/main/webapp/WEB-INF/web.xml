@@ -29,10 +29,20 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>userAvatar</servlet-name>
+		<servlet-class>com.project.user.avatars.ImageServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>spitter</servlet-name>
 		<url-pattern>/app/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>userAvatar</servlet-name>
+		<url-pattern>/image/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- spring security filter -->
