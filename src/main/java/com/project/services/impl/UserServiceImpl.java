@@ -1,14 +1,17 @@
 package com.project.services.impl;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.hibernate.Session;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.dao.UserDao;
 import com.project.domain.UserAccount;
@@ -55,5 +58,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		authorities.add(new SimpleGrantedAuthority("ROLE_SPITTER"));
 		
 		return new User(user.getUsername(), user.getPassword(), authorities);
+	}
+
+	public Session getSessionObject(){
+		return userDao.getSessionObject();
+	}
+
+	@Override
+	public Blob getUserAvatar(String username) {
+		return userDao.getUserAvatar(username);
 	}
 }

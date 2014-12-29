@@ -77,8 +77,8 @@ public class SignInUpController {
 		try {
 			if (!image.isEmpty()) {
 				validateImage(image);
-//				saveImage(user.getUsername()+".jpg", image);
-				Session session = entityManager.unwrap(Session.class);
+				//saveImage(user.getUsername()+".jpg", image);
+				Session session = userService.getSessionObject();
 				Blob imageBlob = Hibernate.getLobCreator(session).createBlob(image.getInputStream(), image.getSize());
 				user.setProfile_image(imageBlob);
 				user.setProfile_image_content_type(image.getContentType());
