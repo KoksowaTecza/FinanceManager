@@ -8,25 +8,25 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/static/**" location="/static/" />
-	<context:component-scan base-package="com.mvc.demo.controllers" />
+	<context:component-scan base-package="com.project.controllers" />
 
 	<import resource="datasource-config.xml" />
 	<import resource="security-config.xml" />
 
 
-	<bean id="spitterDao" class="com.mvc.demo.dao.SpitterJpaDao" />
+	<bean id="userDao" class="com.project.dao.UserJpaDao" />
 
-	<bean id="spitterService" class="com.mvc.demo.services.impl.SpiterServiceImpl">
-		<property name="spitterDao" ref="spitterDao" />
+	<bean id="userService" class="com.project.services.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
 	</bean>
 	
-	<bean id="userAuthenticationProviderService" class="com.mvc.demo.services.impl.UserAuthenticationProviderServiceImpl">
+	<bean id="userAuthenticationProviderService" class="com.project.services.impl.UserAuthenticationProviderServiceImpl">
 		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="spitterEntity" ref="spitterEntity" />
-		<property name="spitterService" ref="spitterService" />
+		<property name="userEntity" ref="userEntity" />
+		<property name="userService" ref="userService" />
 	</bean>
 	
-	<bean id="spitterEntity" class="com.mvc.demo.domain.Spitter" scope="session" >
+	<bean id="userEntity" class="com.project.domain.UserAccount" scope="session" >
 	 <!-- this next element effects the proxying of the surrounding bean -->
         <aop:scoped-proxy/>
 	</bean>
@@ -46,6 +46,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 				<value>/WEB-INF/views/**/views.xml</value>
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messagePl" />
 	</bean>
 
 	<bean id="multipartResolver"

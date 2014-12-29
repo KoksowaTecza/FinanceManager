@@ -17,14 +17,14 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider
-			user-service-ref="spitterService">
+			user-service-ref="userService">
 		</security:authentication-provider>
 	</security:authentication-manager>
 	
 	
 	<bean id="daoAuthenticationProvider"
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<property name="userDetailsService" ref="spitterService" />
+		<property name="userDetailsService" ref="userService" />
 		<property name="hideUserNotFoundExceptions" value="false" />
 	</bean>
 	

@@ -3,7 +3,7 @@
 <jsp:include page="menu.jsp" />
 </sec:authorize>
 <sec:authorize access="isAnonymous()">
-<jsp:include page="signUpForm.jsp" />
+<jsp:include page="signInForm.jsp" />
 </sec:authorize>
 
 

@@ -1,33 +1,41 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-	<h3>Please sign in</h3>
-	<s:url var="authUrl" value="/app/spitters/authenticate" />
-	<form method="post" class="signin" action="${authUrl}" role="form">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+	<h2><s:message code="signUp.name" text="default text" /></h2>
+	<ol class="breadcrumb">
+	  <li><a href="<s:url value="/app/home" />" ><s:message code="breadcrumb.home" text="default text" /></a></li>
+	  <li class="active"><s:message code="breadcrumb.signUp.account" text="default text" /></li>
+	</ol>
+	<sf:form method="POST" modelAttribute="userAccount" class="form-horizontal" enctype="multipart/form-data" role="form">
+		<div class="form">
 		<div class="form-group">
-			<label for="usernameOrEmail">Username or email</label> 
-				<input
-				type="text" class="form-control" id="usernameOrEmail"
-				name="username" />
+		<label for="userFullName"><s:message code="signUp.fullname" text="default text" /></label>
+		<sf:input path="userFullName" id="userFullName" size="15" class="form-control"/>
+		<sf:errors path="userFullName" cssClass="error" />
 		</div>
 		<div class="form-group">
-			<label for="password">Password</label> 
-			<input type="password"
-				class="form-control" id="password" name="password" />
+		<label for="username"><s:message code="signUp.username" text="default text" /></label>
+		<sf:input path="username" id="username" size="15" maxlength="15" class="form-control"/>
+		<sf:errors path="username" cssClass="error" />
 		</div>
-		<div class="checkbox">
-			<label>
-			 <input type="checkbox" id="remeber_me"
-				name="_spring_security_remember_me" /> Remeber me
-			</label>
+		<div class="form-group">
+		<label for="password"><s:message code="signUp.password" text="default text" /></label>
+		<sf:password path="password" id="password" size="30" showPassword="true" class="form-control"/>
+		<sf:errors path="password" cssClass="error" />
 		</div>
-		<button name="commit" type="submit" class="btn btn-primary"/>Sign in</button> <a href="">Forgot</a>
-	</form>
-	<div class="col-md-12">
-		<div class="registration">
-			<p>Want an account</p>
-			<a href="<c:url value="/app/spitters?new" />">Join for free</a>
-			<p>It's fast and easy</p>
+		<div class="form-group">
+		<label for="email"><s:message code="signUp.email" text="default text" /></label>
+		<sf:input path="email" id="email" size="30" class="form-control"/>
+		<sf:errors path="email" cssClass="error" />
 		</div>
-	</div>
+		<div class="form-group">
+		    <label for="image"><s:message code="signUp.profileImg" text="default text" /></label>
+		    <input type="file" name="image">
+		    <p class="help-block"><s:message code="signUp.img.help" text="default text" /></p>
+		 </div>
+		</div>
+		<button type="submit"  class="btn btn-primary"><s:message code="signUp.submit" text="default text" /></button>
+	</sf:form>
+</div>
 </div>
