@@ -1,10 +1,16 @@
 package com.project.controllers;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 
 import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.domain.UserAccount;
+import com.project.services.ImageService;
 import com.project.services.UserService;
 import com.project.services.UserAuthenticationProviderService;
 
@@ -33,12 +40,14 @@ public class SignInUpController {
 	private UserAccount userEntity;
 	private UserAuthenticationProviderService userAuthenticationProviderService;
 	private EntityManager entityManager;
+	private ImageService imageService;
 	
 	
 	@Inject
 	public void setUserAuthenticationProviderService(
-			UserAuthenticationProviderService userAuthenticationProviderService) {
+			UserAuthenticationProviderService userAuthenticationProviderService, ImageService imageService) {
 		this.userAuthenticationProviderService = userAuthenticationProviderService;
+		this.imageService = imageService;
 	}
 
 	@Inject
@@ -78,8 +87,10 @@ public class SignInUpController {
 			if (!image.isEmpty()) {
 				validateImage(image);
 				//saveImage(user.getUsername()+".jpg", image);
+				BufferedImage avatarOrg = ImageIO.read(image.getInputStream());
+				BufferedImage avatar = imageService.resizeUserAvatar(avatarOrg);
 				Session session = userService.getSessionObject();
-				Blob imageBlob = Hibernate.getLobCreator(session).createBlob(image.getInputStream(), image.getSize());
+				Blob imageBlob = Hibernate.getLobCreator(session).createBlob(convertToInputStream(avatar), image.getSize());
 				user.setProfile_image(imageBlob);
 				user.setProfile_image_content_type(image.getContentType());
 				user.setProfile_image_name(image.getOriginalFilename());
@@ -115,6 +126,14 @@ public class SignInUpController {
 	@PersistenceContext
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+	
+	private InputStream convertToInputStream(BufferedImage image) throws IOException{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(image, "jpg", baos );
+		byte[] imageInByte = baos.toByteArray();
+		InputStream is = new ByteArrayInputStream(imageInByte);
+		return is;
 	}
 
 }
