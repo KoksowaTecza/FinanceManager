@@ -97,7 +97,7 @@ public class SignInUpController {
 				imageService.saveProfileImage(profileImage);
 				user.setProfile_image_name(user.getUsername());
 			}else {
-				user.setProfile_image_name("dafault");
+				user.setProfile_image_name("default");
 			}
 		} catch (IOException e) {
 			bindingResult.reject(e.getMessage());
