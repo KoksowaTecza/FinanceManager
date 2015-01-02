@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/configuration")
+@RequestMapping(value = "/profile/configuration")
 public class ConfigurationController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showHome(Model model) {

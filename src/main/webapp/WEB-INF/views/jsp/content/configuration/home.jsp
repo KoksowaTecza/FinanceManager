@@ -6,7 +6,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<h2><s:message code="config.title" text="default text" /></h2>
 			<ol class="breadcrumb">
-				<li class="active"><a href="#"><s:message code="breadcrumb.config" text="default text" /></a></li>
+				<li class="active"><a href="#"><s:message code="breadcrumb.configuration" text="default text" /></a></li>
 			</ol>
 		</div>
 	</div>

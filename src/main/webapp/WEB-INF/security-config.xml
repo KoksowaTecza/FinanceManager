@@ -10,9 +10,9 @@
 
 
 	<security:http auto-config="true" use-expressions="true">
-		<security:form-login login-page="/app/home" default-target-url="/app/spitters/profile" authentication-failure-url="/app/home?login_error=t" />
+		<security:form-login login-page="/app/home" default-target-url="/app/profile/history" authentication-failure-url="/app/home?login_error=t" />
 		<security:logout logout-success-url="/app/home"/>
-		<security:intercept-url pattern="/app/spitters/profile" access="hasRole('ROLE_SPITTER')" />
+		<security:intercept-url pattern="/app/profile/**" access="hasRole('ROLE_SPITTER')" />
 	</security:http>
 
 	<security:authentication-manager>

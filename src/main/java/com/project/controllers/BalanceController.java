@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.domain.UserAccount;
 
 @Controller
-@RequestMapping(value = "/balance")
+@RequestMapping(value = "/profile/balance")
 public class BalanceController {
 	
 	@RequestMapping(method = RequestMethod.GET)

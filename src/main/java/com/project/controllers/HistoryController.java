@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping(value = "/history")
+@RequestMapping(value = "/profile/history")
 public class HistoryController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showHome(Model model) {
