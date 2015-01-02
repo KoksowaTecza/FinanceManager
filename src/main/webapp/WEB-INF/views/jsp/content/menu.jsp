@@ -2,9 +2,9 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <div>
-	<h4>Welcome ${sessionScope['scopedTarget.userEntity'].username}</h4>
+	<h4>Welcome ${sessionScope['scopedTarget.userSessionObject'].username}</h4>
 	<div id="obraz">
-		<img src="<s:url value="/image?id=${sessionScope['scopedTarget.userEntity'].username}" />" width="140px" height="140px" class="img-thumbnail" />
+		<img src="<s:url value="/image?id=${sessionScope['scopedTarget.userSessionObject'].profile_image_name}" />" width="140px" height="140px" class="img-thumbnail" />
 	</div>
 	<div id="menu_button">
 		<a href="<s:url value="/app/home" /> " class="btn btn-success btn-lg btn-block" role="button">Home</a>

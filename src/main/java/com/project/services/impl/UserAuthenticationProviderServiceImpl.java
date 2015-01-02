@@ -8,7 +8,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.project.domain.ProfileImage;
 import com.project.domain.UserAccount;
+import com.project.domain.UserSessionObject;
+import com.project.services.ImageService;
 import com.project.services.UserService;
 import com.project.services.UserAuthenticationProviderService;
 
@@ -22,8 +25,9 @@ import com.project.services.UserAuthenticationProviderService;
 public class UserAuthenticationProviderServiceImpl implements UserAuthenticationProviderService {
 	
 	private AuthenticationManager authenticationManager; 
-	private UserAccount userEnitity;
+	private UserSessionObject userSessionObject;
 	private UserService userService;
+	private ImageService imageService;
 	
 	
 	/**
@@ -39,12 +43,12 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 			SecurityContextHolder.getContext().setAuthentication(result);
 			//set spitter session scope entity
 			UserAccount user = userService.getUserByUsername(username);
-			userEnitity.setUserFullName(user.getUserFullName());
-			userEnitity.setUsername(user.getUsername());
-			userEnitity.setPassword(user.getPassword());
-			userEnitity.setEmail(user.getEmail());
-			userEnitity.setProfile_image(user.getProfile_image());
-			userEnitity.setId(user.getId());
+			userSessionObject.setUserFullName(user.getUserFullName());
+			userSessionObject.setUsername(user.getUsername());
+			userSessionObject.setPassword(user.getPassword());
+			userSessionObject.setEmail(user.getEmail());
+			userSessionObject.setProfile_image_name(user.getProfile_image_name());
+			userSessionObject.setId(user.getId());
 			return true;
 		}catch(AuthenticationException e) {
 			//TO DO set exception
@@ -60,12 +64,18 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 		this.authenticationManager = authenticationManager;
 	}
 
-	public void setUserEntity(UserAccount userEnitity) {
-		this.userEnitity = userEnitity;
-	}
+	
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public void setUserSessionObject(UserSessionObject userSessionObject) {
+		this.userSessionObject = userSessionObject;
+	}
+
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
 	}
 	
 	

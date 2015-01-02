@@ -11,5 +11,4 @@ import com.project.domain.UserAccount;
 public interface UserDao extends GenericDao<UserAccount, Long> {
 	public UserAccount getUserByUsername(String username);
 	public Session getSessionObject();
-	public Blob getUserAvatar(String username);
 }

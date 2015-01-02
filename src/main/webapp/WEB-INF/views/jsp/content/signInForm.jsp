@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-	<h4><s:message code="signIn.name" text="default text" /></h4>
+	<h3><s:message code="signIn.name" text="default text" /></h3>
 	<s:url var="authUrl" value="/app/account/authenticate" />
 	<form method="post" class="signin" action="${authUrl}" role="form">
 		<div class="form-group">

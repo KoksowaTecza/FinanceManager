@@ -13,5 +13,4 @@ public interface UserService {
 	public UserAccount getUserByUsername(String username);
 	public UserAccount updateUserAccount(UserAccount user);
 	public Session getSessionObject();
-	public Blob getUserAvatar(String username);
 }

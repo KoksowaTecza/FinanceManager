@@ -15,20 +15,24 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 
 
 	<bean id="userDao" class="com.project.dao.UserJpaDao" />
+	<bean id="userAvatarDao" class="com.project.dao.UserAvatarJpaDao" />
 
 	<bean id="userService" class="com.project.services.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
 	</bean>
 	
-	<bean id="imageService" class="com.project.services.impl.ImageServiceImpl" />
+	<bean id="imageService" class="com.project.services.impl.ImageServiceImpl" >
+		<property name="userAvatarDao" ref="userAvatarDao" />
+	</bean>
 	
 	<bean id="userAuthenticationProviderService" class="com.project.services.impl.UserAuthenticationProviderServiceImpl">
 		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="userEntity" ref="userEntity" />
+		<property name="userSessionObject" ref="userSessionObject" />
 		<property name="userService" ref="userService" />
+		<property name="imageService" ref="imageService" />
 	</bean>
 	
-	<bean id="userEntity" class="com.project.domain.UserAccount" scope="session" >
+	<bean id="userSessionObject" class="com.project.domain.UserSessionObject" scope="session" >
 	 <!-- this next element effects the proxying of the surrounding bean -->
         <aop:scoped-proxy/>
 	</bean>

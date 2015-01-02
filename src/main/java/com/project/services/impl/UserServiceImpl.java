@@ -64,8 +64,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		return userDao.getSessionObject();
 	}
 
-	@Override
-	public Blob getUserAvatar(String username) {
-		return userDao.getUserAvatar(username);
-	}
 }

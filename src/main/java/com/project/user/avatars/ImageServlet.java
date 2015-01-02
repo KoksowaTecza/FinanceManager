@@ -17,11 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import com.project.domain.ProfileImage;
+import com.project.services.ImageService;
 import com.project.services.UserService;
 
 public class ImageServlet extends HttpServlet {
 	@Autowired
-	UserService userService;
+	ImageService imageService;
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -33,7 +35,8 @@ public class ImageServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String username = (String) request.getParameter("id");
-			Blob image = userService.getUserAvatar(username);
+			ProfileImage profileImage = imageService.getUserProfileImage(username);
+			Blob image = profileImage.getProfile_image();
 			ServletOutputStream out = response.getOutputStream();
 			response.setContentType("image/gif");
 			InputStream in;

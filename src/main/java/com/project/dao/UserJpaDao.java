@@ -41,26 +41,6 @@ public class UserJpaDao extends GenericJpaDao<UserAccount, Long> implements User
 		return session;
 	}
 
-	@Override
-	public Blob getUserAvatar(String username) {
-		Assert.notNull(username);
-		
-		UserAccount user = null;
-		
-		Query query = getEntityManager().createQuery("from " + getPeristenceClass().getName() + " u where u.username = :username").setParameter("username", username);
-		
-		try {
-			user = (UserAccount)query.getSingleResult();
-		}catch(NoResultException e){
-			//do nothing
-		}
-		
-		Blob image = user.getProfile_image();
-		return image;
-	}
-
-	
-	
 	
 	
 

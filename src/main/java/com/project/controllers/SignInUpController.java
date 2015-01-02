@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.domain.ProfileImage;
 import com.project.domain.UserAccount;
 import com.project.services.ImageService;
 import com.project.services.UserService;
@@ -37,10 +38,9 @@ import com.project.services.UserAuthenticationProviderService;
 public class SignInUpController {
 
 	private UserService userService;
-	private UserAccount userEntity;
 	private UserAuthenticationProviderService userAuthenticationProviderService;
-	private EntityManager entityManager;
 	private ImageService imageService;
+
 	
 	
 	@Inject
@@ -50,10 +50,7 @@ public class SignInUpController {
 		this.imageService = imageService;
 	}
 
-	@Inject
-	public void setUserEntity(UserAccount userEntity) {
-		this.userEntity = userEntity;
-	}
+	
 
 	@Inject
 	public SignInUpController(UserService userService) {
@@ -85,15 +82,20 @@ public class SignInUpController {
 		
 		try {
 			if (!image.isEmpty()) {
+				ProfileImage profileImage = new ProfileImage();
+				
 				validateImage(image);
 				//saveImage(user.getUsername()+".jpg", image);
 				BufferedImage avatarOrg = ImageIO.read(image.getInputStream());
 				BufferedImage avatar = imageService.resizeUserAvatar(avatarOrg);
 				Session session = userService.getSessionObject();
 				Blob imageBlob = Hibernate.getLobCreator(session).createBlob(convertToInputStream(avatar), image.getSize());
-				user.setProfile_image(imageBlob);
-				user.setProfile_image_content_type(image.getContentType());
-				user.setProfile_image_name(image.getOriginalFilename());
+				
+				profileImage.setProfile_image_name(user.getUsername());
+				profileImage.setProfile_image(imageBlob);
+				profileImage.setProfile_image_content_type(image.getContentType());
+				imageService.saveProfileImage(profileImage);
+				user.setProfile_image_name(user.getUsername());
 			}else {
 				user.setProfile_image_name("dafault");
 			}
@@ -123,10 +125,6 @@ public class SignInUpController {
 //		}
 //	}
 	
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
 	
 	private InputStream convertToInputStream(BufferedImage image) throws IOException{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
