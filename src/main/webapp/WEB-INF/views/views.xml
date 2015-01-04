@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 	<definition name="base.definition" template="/WEB-INF/views/jsp/layout.jsp">
 		<put-attribute name="title" value="" />
@@ -11,59 +11,105 @@
 	<definition name="home" extends="base.definition">
 		<put-attribute name="title" value="" />
 		<put-attribute name="content" value="" />
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="account/create" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/signUpForm.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/signUpForm.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="balance" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/balance/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/balance/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
+
 	<definition name="configuration" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/configuration/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
+	<definition name="configuration/manager"
+		extends="configuration">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/configuration/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/configuration/finance.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="configuration/manager/success"
+		extends="configuration">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/configuration/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/financeSuccess.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="configuration/profile"
+		extends="configuration">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/configuration/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/configuration/profile.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+
+
 	<definition name="expenses" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/expenses/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/expenses/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="history" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/history/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/history/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="investition" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/investition/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/investition/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="reports" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/reports/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/reports/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
 	<definition name="revenues" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/revenues/home.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/revenues/home.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
-	
-	
+
+
 	<definition name="spitters/view" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/spitterProfile.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menu.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/spitterProfile.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menu.jsp" />
 	</definition>
 	<definition name="userSpittles/view" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content" value="/WEB-INF/views/jsp/content/userSpittles.jsp" />
-		<put-attribute name="menu" value="/WEB-INF/views/jsp/content/menu.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/jsp/content/userSpittles.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/views/jsp/content/menu.jsp" />
 	</definition>
 </tiles-definitions>
 

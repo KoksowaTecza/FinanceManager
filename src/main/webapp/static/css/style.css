@@ -42,7 +42,16 @@ body {
 #content .error{
 	color:red;
 }
-
+#content .nav{
+	margin-bottom: 20px;
+}
+#content .nav.nav-tabs.nav-justified a{
+	background-color: #D3D3D3;
+}
+#content .nav.nav-tabs.nav-justified .active a{
+	color: #fff;
+	background-color: #0353AC;
+}
 #menu {
 	width: 100%;
 	min-height: 450px;

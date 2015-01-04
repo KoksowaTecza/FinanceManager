@@ -14,6 +14,7 @@ public class UserSessionObject implements Serializable {
 	private String password;
 	private String email;
 	private String profile_image_name;
+	private Blob profile_image;
 	public String getUserFullName() {
 		return userFullName;
 	}
@@ -49,6 +50,12 @@ public class UserSessionObject implements Serializable {
 	}
 	public void setProfile_image_name(String profile_image_name) {
 		this.profile_image_name = profile_image_name;
+	}
+	public Blob getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(Blob profile_image) {
+		this.profile_image = profile_image;
 	}
 	
 	

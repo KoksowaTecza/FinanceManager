@@ -13,7 +13,7 @@
 		<a href="<s:url value="/app/profile/investition"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.invest" text="default text" /></a>
 		<a href="<s:url value="/app/profile/balance"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.balance" text="default text" /></a>
 		<a href="<s:url value="/app/profile/reports"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.report" text="default text" /></a>
-		<a href="<s:url value="/app/profile/configuration" />" class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.config" text="default text" /></a>
+		<a href="<s:url value="/app/profile/configuration/finance" />" class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.config" text="default text" /></a>
 		<a href="<s:url value="/j_spring_security_logout" /> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.logout" text="default text" /></a>
 	</div>
 </div>

@@ -49,6 +49,9 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 			userSessionObject.setEmail(user.getEmail());
 			userSessionObject.setProfile_image_name(user.getProfile_image_name());
 			userSessionObject.setId(user.getId());
+			
+			ProfileImage image = imageService.getUserProfileImage(user.getProfile_image_name());
+			userSessionObject.setProfile_image(image.getProfile_image());
 			return true;
 		}catch(AuthenticationException e) {
 			//TO DO set exception
