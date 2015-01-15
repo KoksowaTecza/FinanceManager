@@ -116,3 +116,18 @@ body {
 	    color: #f6ca19;
     font-weight:bold;
 }
+#user_categories_revenue, #user_categories_revenue table {
+	font-family: Verdana;
+	font-weight: normal;
+	font-size: 12px;
+	font-style: normal;
+}
+
+
+
+#user_categories_revenue .buttons_grid a {
+	font-weight: bold;
+}
+#iconsPage .modal-body a i{
+	margin:4px;
+}

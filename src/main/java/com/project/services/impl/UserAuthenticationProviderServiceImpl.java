@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.project.domain.ProfileImage;
 import com.project.domain.UserAccount;
 import com.project.domain.UserSessionObject;
+import com.project.services.ConfigurationDataService;
+import com.project.services.FinanceService;
 import com.project.services.ImageService;
 import com.project.services.UserService;
 import com.project.services.UserAuthenticationProviderService;
@@ -28,7 +30,8 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 	private UserSessionObject userSessionObject;
 	private UserService userService;
 	private ImageService imageService;
-	
+	private ConfigurationDataService configurationDataService;
+	private FinanceService financeService;
 	
 	/**
 	 * Process user authentication
@@ -49,9 +52,10 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 			userSessionObject.setEmail(user.getEmail());
 			userSessionObject.setProfile_image_name(user.getProfile_image_name());
 			userSessionObject.setId(user.getId());
-			
+			userSessionObject.setConfigurationAllert(!configurationDataService.checkIfConfigurationExsist(username));
 			ProfileImage image = imageService.getUserProfileImage(user.getProfile_image_name());
 			userSessionObject.setProfile_image(image.getProfile_image());
+			userSessionObject.setMonitorAllert(financeService.isMonitorStart());
 			return true;
 		}catch(AuthenticationException e) {
 			//TO DO set exception
@@ -79,6 +83,19 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 
 	public void setImageService(ImageService imageService) {
 		this.imageService = imageService;
+	}
+
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	public void setConfigurationDataService(
+			ConfigurationDataService configurationDataService) {
+		this.configurationDataService = configurationDataService;
+	}
+
+	public void setFinanceService(FinanceService financeService) {
+		this.financeService = financeService;
 	}
 	
 	

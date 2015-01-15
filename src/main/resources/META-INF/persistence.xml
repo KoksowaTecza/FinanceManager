@@ -8,5 +8,8 @@
         	<class>com.project.domain.Spittle</class>
         	<class>com.project.domain.UserAccount</class>
         	<class>com.project.domain.ProfileImage</class>
+        	<class>com.project.domain.ConfigurationData</class>
+        	<class>com.project.domain.BalanceEntity</class>
+        	<class>com.project.domain.CategoryRevenueEntity</class>
         </persistence-unit>
 </persistence>

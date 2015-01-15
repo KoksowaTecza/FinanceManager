@@ -7,6 +7,7 @@
 		<put-attribute name="title" value="" />
 		<put-attribute name="content" value="" />
 		<put-attribute name="menu" value="" />
+		<put-attribute name="addings" value="/WEB-INF/views/jsp/content/generalAddings.jsp" />
 	</definition>
 	<definition name="home" extends="base.definition">
 		<put-attribute name="title" value="" />
@@ -33,6 +34,7 @@
 		<put-attribute name="title" value="" />
 		<put-attribute name="menu"
 			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+		<put-attribute name="addings" value="" />
 	</definition>
 	<definition name="configuration/manager"
 		extends="configuration">
@@ -46,7 +48,7 @@
 		extends="configuration">
 		<put-attribute name="content">
             <definition template="/WEB-INF/views/jsp/content/configuration/main.jsp">
-                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/financeSuccess.jsp" />
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/configuration/financeSuccess.jsp" />
             </definition>
          </put-attribute>
 	</definition>
@@ -88,12 +90,38 @@
 		<put-attribute name="menu"
 			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
+	
+	
 	<definition name="revenues" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content"
-			value="/WEB-INF/views/jsp/content/revenues/home.jsp" />
 		<put-attribute name="menu"
 			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
+	</definition>
+	<definition name="revenues/revenues"
+		extends="revenues">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/revenues/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/revenues/revenues.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="revenues/revenues/accountConfiguration"
+		extends="revenues">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/revenues/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/configurationAllert.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="revenues/categories"
+		extends="revenues">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/revenues/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/revenues/categories.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="revenues/categories/modal" template="/WEB-INF/views/jsp/content/revenues/modalForm.jsp">
 	</definition>
 
 

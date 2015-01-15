@@ -1,4 +1,4 @@
-package com.project.dao;
+package com.project.dao.impl;
 
 import java.io.InputStream;
 import java.sql.Blob;
@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.commons.dao.GenericJpaDao;
+import com.project.dao.UserDao;
 import com.project.domain.UserAccount;
 
 

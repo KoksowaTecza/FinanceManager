@@ -1,0 +1,1 @@
+Skonfiguruj konto

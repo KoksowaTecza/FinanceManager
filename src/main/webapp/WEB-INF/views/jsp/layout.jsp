@@ -1,5 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,6 +8,8 @@
 	href="<c:url value="/app/static/css/bootstrap.min.css" />" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/app/static/css/style.css" />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/app/static/font-awesome/css/font-awesome.min.css" />" />
 <script src="<c:url value="/app/static/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/app/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/app/static/js/script.js" />"></script>
@@ -31,5 +34,6 @@
 			</div>
 		</div>
 	</div>
+	<tiles:insertAttribute name="addings" />
 </body>
 </html>

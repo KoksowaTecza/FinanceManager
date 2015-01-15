@@ -11,18 +11,18 @@ $(document).ready(function(){
 						<label for="inputEmail3" class="col-md-3 control-label">Waluta</label>
 						<div class="col-md-9">
 						<label class="radio-inline"> 
-							<sf:radiobutton path="waluta" value="zloty" />Zloty
+							<sf:radiobutton path="currency" value="zloty" />Zloty
 						</label> 
 						<label class="radio-inline"> 
-							<sf:radiobutton path="waluta" value="dolar" />Dolar
+							<sf:radiobutton path="currency" value="dolar" />Dolar
 						</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail3" class="col-md-3 control-label">Kwota poczatkowa</label>
 						<div class="col-md-5">
-							<sf:input path="startAmount" id="startAmount" class="form-control" placeholder="Kwota"/>
-							<sf:errors path="startAmount" cssClass="error" />
+							<sf:input path="startamount" id="startAmount" class="form-control" placeholder="Kwota"/>
+							<sf:errors path="startamount" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -30,6 +30,7 @@ $(document).ready(function(){
 							<button type="submit" class="btn btn-success">Zapisz</button>
 						</div>
 					</div>
+					<input type="hidden" name="edit" value="${edit}" />
 				</sf:form>
 
 			</div>

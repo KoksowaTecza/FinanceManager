@@ -14,6 +14,7 @@
 		<security:logout logout-success-url="/app/home"/>
 		<security:intercept-url pattern="/app/profile/**" access="hasRole('ROLE_SPITTER')" />
 	</security:http>
+	
 
 	<security:authentication-manager>
 		<security:authentication-provider

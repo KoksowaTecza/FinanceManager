@@ -15,6 +15,8 @@ public class UserSessionObject implements Serializable {
 	private String email;
 	private String profile_image_name;
 	private Blob profile_image;
+	private boolean configurationAllert;
+	private boolean monitorAllert;
 	public String getUserFullName() {
 		return userFullName;
 	}
@@ -56,6 +58,18 @@ public class UserSessionObject implements Serializable {
 	}
 	public void setProfile_image(Blob profile_image) {
 		this.profile_image = profile_image;
+	}
+	public boolean isConfigurationAllert() {
+		return configurationAllert;
+	}
+	public void setConfigurationAllert(boolean configurationAllert) {
+		this.configurationAllert = configurationAllert;
+	}
+	public boolean isMonitorAllert() {
+		return monitorAllert;
+	}
+	public void setMonitorAllert(boolean monitorAllert) {
+		this.monitorAllert = monitorAllert;
 	}
 	
 	
