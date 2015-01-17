@@ -7,28 +7,27 @@ import javax.persistence.Query;
 
 import org.springframework.util.Assert;
 
-import com.project.commons.dao.GenericDao;
 import com.project.commons.dao.GenericJpaDao;
+import com.project.dao.CategoryExpensesDao;
 import com.project.dao.CategoryRevenueDao;
-import com.project.dao.ConfigurationDao;
+import com.project.domain.CategoryExpensesEntity;
 import com.project.domain.CategoryRevenueEntity;
-import com.project.domain.ConfigurationData;
 
-public class CategoryRevenueJpaDao extends GenericJpaDao<CategoryRevenueEntity, String> implements CategoryRevenueDao {
-	public CategoryRevenueJpaDao() {
-		super(CategoryRevenueEntity.class);
+public class CategoryExpensesJpaDao extends GenericJpaDao<CategoryExpensesEntity, String> implements CategoryExpensesDao {
+	public CategoryExpensesJpaDao() {
+		super(CategoryExpensesEntity.class);
 	}
-
+	
 	@Override
-	public List<CategoryRevenueEntity> getAllCategoryRevenuesForUser(
+	public List<CategoryExpensesEntity> getAllCategoryRevenuesForUser(
 			String username) {
 		
-		List<CategoryRevenueEntity> enities;
+		List<CategoryExpensesEntity> enities;
 		Assert.notNull(username);
 		
 		Query query = getEntityManager().createQuery("from "+ getPeristenceClass().getSimpleName() + " x where x.username = :username").setParameter("username", username);
 		try {
-			enities = (List<CategoryRevenueEntity>)query.getResultList();
+			enities = (List<CategoryExpensesEntity>)query.getResultList();
 		}catch(NoResultException e){
 			return null;
 		}
@@ -49,12 +48,12 @@ public class CategoryRevenueJpaDao extends GenericJpaDao<CategoryRevenueEntity, 
 	}
 
 	@Override
-	public CategoryRevenueEntity getCategoryByName(String name) {
+	public CategoryExpensesEntity getCategoryByName(String name) {
 		Assert.notNull(name);
-		CategoryRevenueEntity entity;
+		CategoryExpensesEntity entity;
 		Query query = getEntityManager().createQuery("from "+ getPeristenceClass().getSimpleName() + " x where x.category_name = :category_name").setParameter("category_name", name);
 		try {
-			entity = (CategoryRevenueEntity)query.getSingleResult();
+			entity = (CategoryExpensesEntity)query.getSingleResult();
 		}catch(NoResultException e){
 			return null;
 		}

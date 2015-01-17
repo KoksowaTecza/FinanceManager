@@ -17,7 +17,7 @@ $(document).ready(function() {
 function doAjaxPost() {
 	    // get the form values
 	    $("input").prop('disabled', true);
-	    var urlGet = "<s:url value='/app/profile/revenues/categories'/>";
+	    var urlGet = "<s:url value='/app/profile/expenses/categories'/>";
 	    
 	    if($("#edit").val()=='edit'){
 	    	urlGet = urlGet+"?edit";
@@ -40,7 +40,6 @@ function doAjaxPost() {
 	            	 $('#addCategory').modal('hide');   
 	            	 var onlyUrl = window.location.href.replace(window.location.search,'');
 	            	 window.location.replace(onlyUrl+"?success=true");
-	       
 	            	 //$('#succes_message').show();
 	            	 /* var url = "<s:url value='/app/profile/revenues/categories/'/>"+response.result.category_name;
 	            	 if(response.addings != "edit"){
@@ -85,7 +84,7 @@ function doAjaxPost() {
 			</div>
 
 			<div class="modal-body">
-				<sf:form method="POST" modelAttribute="categoryRevenueEntity"
+				<sf:form method="POST" modelAttribute="categoryExpensesEntity"
 					class="form-horizontal" role="form" id="formAddCategory">
 					<div class="form-group">
 						<label for="inputEmail3" class="col-md-3 control-label">Nazwa
@@ -121,7 +120,7 @@ function doAjaxPost() {
 	</div>
 </div>
 
-<div class="modal fade" id="iconsPage" tabindex="-1" role="dialog"
+	<div class="modal fade" id="iconsPage" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -133,12 +132,12 @@ function doAjaxPost() {
 					<h4 class="modal-title" id="myModalLabel">Wybierz ikone</h4>
 				</div>
 				<div class="modal-body">
-					<a href="#"><i class="fa fa-glass fa-4x fa-border"></i></a> <a
-						href="#"><i class="fa fa-coffee fa-4x fa-border"></i></a> <a
-						href="#"><i class="fa fa-graduation-cap fa-4x fa-border"></i></a>
-					<a href="#"><i class="fa fa-heart fa-4x fa-border"></i></a> <a
-						href="#"><i class="fa fa-home fa-4x fa-border"></i></a> <a
-						href="#"><i class="fa fa-briefcase fa-4x fa-border"></i></a>
+					<a href=""><i class="fa fa-glass fa-4x fa-border"></i></a> <a
+						href=""><i class="fa fa-coffee fa-4x fa-border"></i></a> <a
+						href=""><i class="fa fa-graduation-cap fa-4x fa-border"></i></a>
+					<a href=""><i class="fa fa-heart fa-4x fa-border"></i></a> <a
+						href=""><i class="fa fa-home fa-4x fa-border"></i></a> <a
+						href=""><i class="fa fa-briefcase fa-4x fa-border"></i></a>
 				</div>
 			</div>
 		</div>

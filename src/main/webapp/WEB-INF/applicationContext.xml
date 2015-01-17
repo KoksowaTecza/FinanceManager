@@ -19,6 +19,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 	<bean id="configurationDao" class="com.project.dao.impl.ConfigurationJpaDao" />
 	<bean id="balanceDao" class="com.project.dao.impl.BalanceJpaDao" />
 	<bean id="categoryRevenueDao" class="com.project.dao.impl.CategoryRevenueJpaDao" />
+	<bean id="categoryExpensesDao" class="com.project.dao.impl.CategoryExpensesJpaDao" />
 
 	<bean id="userService" class="com.project.services.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
@@ -49,6 +50,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 		<property name="configurationDataService" ref="configurationDataService" />
 		<property name="financeService" ref="financeService" />
 	</bean>
+	
+	<bean id="categoryService" class="com.project.services.impl.CategoryServiceImpl">
+		<property name="categoryRevenueDao" ref="categoryRevenueDao" />
+		<property name="categoryExpensesDao" ref="categoryExpensesDao" />
+	</bean>
+	
+	
 	
 	<bean id="userSessionObject" class="com.project.domain.UserSessionObject" scope="session" >
 	 <!-- this next element effects the proxying of the surrounding bean -->

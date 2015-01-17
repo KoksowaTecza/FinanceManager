@@ -21,6 +21,7 @@ import com.project.domain.CategoryRevenueEntity;
 import com.project.domain.ConfigurationData;
 import com.project.domain.JsonResponse;
 import com.project.domain.UserSessionObject;
+import com.project.services.CategoryService;
 import com.project.services.ConfigurationDataService;
 import com.project.services.FinanceService;
 
@@ -30,25 +31,33 @@ public class RevenuesController {
 	private ConfigurationDataService configurationDataService;
 	private UserSessionObject userSessionObject;
 	private FinanceService financeService;
+	private CategoryService categoryService;
 
 	@Inject
 	public RevenuesController(
 			ConfigurationDataService configurationDataService,
-			UserSessionObject userSessionObject, FinanceService financeService) {
+			UserSessionObject userSessionObject, FinanceService financeService, CategoryService categoryService) {
 		this.configurationDataService = configurationDataService;
 		this.userSessionObject = userSessionObject;
 		this.financeService = financeService;
+		this.categoryService = categoryService;
 	}
 
 	@RequestMapping(value = "/revenues", method = RequestMethod.GET)
 	public String showRevenuesTab(Model model) {
 		return "revenues/revenues";
 	}
+	
+	
 
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-	public String showCategoriesTab(Model model) {
-		List<CategoryRevenueEntity> list = financeService.getAllCategoryRevenuesForUser(userSessionObject.getUsername());
+	public String showCategoriesTab(Model model, HttpServletRequest request) {
+		List<CategoryRevenueEntity> list = categoryService.getAllCategoryRevenuesForUser(userSessionObject.getUsername());
 		model.addAttribute("categoryList", list);
+		if(request.getParameter("success")!=null){
+			String req = request.getParameter("success");
+			model.addAttribute("success", req);
+		}
 		return "revenues/categories";
 	}
 
@@ -61,8 +70,33 @@ public class RevenuesController {
 	@RequestMapping(value = "/categories/{catname}", method = RequestMethod.GET, params = "edit")
 	public String showModalEditCategory(@PathVariable String catname, Model model) {
 		model.addAttribute("edit", "edit");
-		model.addAttribute(financeService.getcategoryRevenueEntity(catname));
+		model.addAttribute(categoryService.getCategoryRevenueEntity(catname));
 		return "revenues/categories/modal";
+	}
+	
+	@RequestMapping(value = "/categories/{catname}", method = RequestMethod.GET, params = "delete")
+	public @ResponseBody JsonResponse deleteSelectedCategory(@PathVariable String catname, Model model) {
+		categoryService.daleteRevenueCategoryByName(catname);
+		JsonResponse res = new JsonResponse();
+		res.setStatus("SUCCESS");
+		res.setResult(catname);
+		return res;
+	}
+	
+	@RequestMapping(value = "/categories", method = RequestMethod.POST, params = "edit")
+	public @ResponseBody JsonResponse editCategory(@Valid @ModelAttribute(value = "categoryRevenueEntity") CategoryRevenueEntity categoryRevenueEntity,
+			BindingResult result, HttpServletRequest request) {
+		JsonResponse res = new JsonResponse();
+		if (!result.hasErrors()) {
+			res.setStatus("SUCCESS");
+			categoryRevenueEntity.setUsername(userSessionObject.getUsername());
+			res.setResult(categoryService.updateCategoryRevenueEntity(categoryRevenueEntity));
+			res.setAddings("edit");
+		}else {
+			res.setStatus("FAIL");
+			res.setResult(result.getAllErrors());
+		}
+		return res;
 	}
 	
 	
@@ -74,7 +108,7 @@ public class RevenuesController {
 		if (!result.hasErrors()) {
 			res.setStatus("SUCCESS");
 			categoryRevenueEntity.setUsername(userSessionObject.getUsername());
-			res.setResult(financeService.careateNewRevenueCategory(categoryRevenueEntity));
+			res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
 		}else {
 			res.setStatus("FAIL");
 			res.setResult(result.getAllErrors());
@@ -82,19 +116,6 @@ public class RevenuesController {
 		return res;
 	}
 	
-	@RequestMapping(value = "/categories", method = RequestMethod.POST, params = "edit")
-	public @ResponseBody JsonResponse editCategory(@Valid @ModelAttribute(value = "categoryRevenueEntity") CategoryRevenueEntity categoryRevenueEntity,
-			BindingResult result, HttpServletRequest request) {
-		JsonResponse res = new JsonResponse();
-		if (!result.hasErrors()) {
-			res.setStatus("SUCCESS");
-			categoryRevenueEntity.setUsername(userSessionObject.getUsername());
-			res.setResult(financeService.updateCategoryRevenueEntity(categoryRevenueEntity));
-		}else {
-			res.setStatus("FAIL");
-			res.setResult(result.getAllErrors());
-		}
-		return res;
-	}
+	
 
 }

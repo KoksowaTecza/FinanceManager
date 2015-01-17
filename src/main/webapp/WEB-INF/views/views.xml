@@ -64,11 +64,30 @@
 
 	<definition name="expenses" extends="base.definition">
 		<put-attribute name="title" value="" />
-		<put-attribute name="content"
-			value="/WEB-INF/views/jsp/content/expenses/home.jsp" />
 		<put-attribute name="menu"
 			value="/WEB-INF/views/jsp/content/menuResolver.jsp" />
 	</definition>
+	<definition name="expenses/expenses"
+		extends="expenses">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/expenses/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/expenses/expenses.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="expenses/categories"
+		extends="expenses">
+		<put-attribute name="content">
+            <definition template="/WEB-INF/views/jsp/content/expenses/main.jsp">
+                <put-attribute name="tab" value="/WEB-INF/views/jsp/content/expenses/categories.jsp" />
+            </definition>
+         </put-attribute>
+	</definition>
+	<definition name="expenses/categories/modal" template="/WEB-INF/views/jsp/content/expenses/modalForm.jsp">
+	</definition>
+	
+	
+	
 	<definition name="history" extends="base.definition">
 		<put-attribute name="title" value="" />
 		<put-attribute name="content"

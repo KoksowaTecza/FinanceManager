@@ -58,27 +58,5 @@ public class FinanceServiceImpl implements FinanceService {
 		return false;
 	}
 
-	@Override
-	public CategoryRevenueEntity careateNewRevenueCategory(
-			CategoryRevenueEntity categoryRevenueEntity) {
-		return categoryRevenueDao.save(categoryRevenueEntity);
-	}
-
-	@Override
-	public CategoryRevenueEntity getcategoryRevenueEntity(String categoryName) {
-		return categoryRevenueDao.findById(categoryName);
-	}
-
-	@Override
-	public CategoryRevenueEntity updateCategoryRevenueEntity(
-			CategoryRevenueEntity categoryRevenueEntity) {
-		return categoryRevenueDao.update(categoryRevenueEntity);
-	}
-
-	@Override
-	public List<CategoryRevenueEntity> getAllCategoryRevenuesForUser(
-			String username) {
-		return categoryRevenueDao.getAllCategoryRevenuesForUser(username);
-	}
 
 }

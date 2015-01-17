@@ -1,9 +1,6 @@
 package com.project.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -11,9 +8,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.project.commons.domain.BaseEntity;
 
 @Entity
-@Table(name="USER_CATEGORIES_REVENUES")
-public class CategoryRevenueEntity extends BaseEntity {
-
+@Table(name="USER_CATEGORIES_EXPENSES")
+public class CategoryExpensesEntity extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	@NotEmpty(message="To pole jest wymagane")
 	private String category_name;
@@ -44,5 +40,4 @@ public class CategoryRevenueEntity extends BaseEntity {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 }

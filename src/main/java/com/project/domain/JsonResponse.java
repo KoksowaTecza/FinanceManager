@@ -4,6 +4,8 @@ public class JsonResponse {
 	private String status = null;
 
 	private Object result = null;
+	
+	private  Object addings = null;
 
 	public String getStatus() {
 
@@ -27,6 +29,14 @@ public class JsonResponse {
 
 		this.result = result;
 
+	}
+
+	public Object getAddings() {
+		return addings;
+	}
+
+	public void setAddings(Object addings) {
+		this.addings = addings;
 	}
 
 }

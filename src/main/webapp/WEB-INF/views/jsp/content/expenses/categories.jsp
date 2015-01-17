@@ -3,17 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 		var notification = "${success}"
-		if(notification=="true"){
-			$('#succes_message').show();
-		}
-		if(notification=="false"){
-			$('#danger_message').show();
-		}
+			if(notification=="true"){
+				$('#succes_message').show();
+			}
+			if(notification=="false"){
+				$('#danger_message').show();
+			}
 		$('.nav.nav-tabs.nav-justified li.2').addClass("active");
-		
+	
+
 		$("#category_table").on({
 			click : function(e) {
 				e.preventDefault();
@@ -64,7 +65,7 @@
 			beforeSend : function(req) {
 				req.setRequestHeader("Accept", "text/html;type=ajax");
 			},
-			url : " <s:url value="/app/profile/revenues/categories"/> ",
+			url : " <s:url value="/app/profile/expenses/categories"/> ",
 			data : "new",
 			success : function(response) {
 				$("#addCetegoryModal").html(response);
@@ -77,19 +78,15 @@
 	}
 </script>
 <div id="user_categories_revenue">
-	
-		<div class="alert alert-success" role="alert" id="succes_message"
-			style="display: none;">
-			<strong>Sukces!</strong> Dane zostaly zapisane poprawnie.
-		</div>
-	
-	
-	<div class="alert alert-danger" role="alert" id="danger_message"
+	<div class="alert alert-success" role="alert" id="succes_message"
+		style="display: none;">
+		<strong>Sukces!</strong> Dane zostaly zapisane poprawnie.
+	</div>
+	<div class="alert alert-danger" role="alert" id="dange_message"
 		style="display: none;">
 		<strong>Blad!</strong> Dane nie zostaly zapisane poprawnie, sprobuj
 		pozniej.
 	</div>
-	
 	<div class="alert alert-success" role="alert" id="succes_message_delete"
 		style="display: none;">
 		<strong>Sukces!</strong> Dane zostaly usuniete poprawnie.
@@ -115,7 +112,7 @@
 		<tbody>
 			<c:if test="${categoryList != null}">
 			<c:forEach var="category" items="${categoryList}">
-				<c:set var="url"><s:url value='/app/profile/revenues/categories/'/></c:set>
+				<c:set var="url"><s:url value='/app/profile/expenses/categories/'/></c:set>
 				<tr>
 					<td class="icon" align="center"><i class="${category.icon_name} fa-2x fa-border" style="color:#428bca;"></i></td>
 					<td class="cat_name">${category.category_name}</td>
@@ -127,6 +124,6 @@
 		</tbody>
 	</table>
 
-	
+
 
 </div>

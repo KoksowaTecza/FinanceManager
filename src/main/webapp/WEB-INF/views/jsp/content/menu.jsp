@@ -9,7 +9,7 @@
 	<div id="menu_button">
 		<a href="<s:url value="/app/profile/history"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.history" text="default text" /></a>
 		<a href="<s:url value="/app/profile/revenues/revenues"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.revenu" text="default text" /></a>
-		<a href="<s:url value="/app/profile/expenses"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.expenses" text="default text" /></a>
+		<a href="<s:url value="/app/profile/expenses/expenses"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.expenses" text="default text" /></a>
 		<a href="<s:url value="/app/profile/investition"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.invest" text="default text" /></a>
 		<a href="<s:url value="/app/profile/balance"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.balance" text="default text" /></a>
 		<a href="<s:url value="/app/profile/reports"/> " class="btn btn-success btn-lg btn-block" role="button"><s:message code="menu.report" text="default text" /></a>

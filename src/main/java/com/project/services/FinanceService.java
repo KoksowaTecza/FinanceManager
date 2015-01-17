@@ -10,8 +10,4 @@ public interface FinanceService {
 	boolean isMonitorStart();
 	BalanceEntity getPreviousPeriodBalance(String username);
 	boolean createNewPeriod(BalanceEntity balanceEntity);
-	CategoryRevenueEntity careateNewRevenueCategory(CategoryRevenueEntity categoryRevenueEntity);
-	CategoryRevenueEntity getcategoryRevenueEntity(String categoryName);
-	CategoryRevenueEntity updateCategoryRevenueEntity(CategoryRevenueEntity categoryRevenueEntity);
-	public List<CategoryRevenueEntity> getAllCategoryRevenuesForUser(String username);
 }
