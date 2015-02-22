@@ -43,6 +43,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 		<property name="categoryRevenueDao" ref="categoryRevenueDao" />
 		<property name="revenueDao" ref="revenueDao" />
 		<property name="expenseDao" ref="expenseDao" />
+		<property name="balanceSessionObject" ref="balanceSessionObject" />
 	</bean>
 	
 	
@@ -53,6 +54,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 		<property name="imageService" ref="imageService" />
 		<property name="configurationDataService" ref="configurationDataService" />
 		<property name="financeService" ref="financeService" />
+		<property name="balanceSessionObject" ref="balanceSessionObject" />
 	</bean>
 	
 	<bean id="categoryService" class="com.project.services.impl.CategoryServiceImpl">
@@ -63,6 +65,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 	
 	
 	<bean id="userSessionObject" class="com.project.domain.UserSessionObject" scope="session" >
+	 <!-- this next element effects the proxying of the surrounding bean -->
+        <aop:scoped-proxy/>
+	</bean>
+	
+	<bean id="balanceSessionObject" class="com.project.domain.BalanceSessionObject" scope="session" >
 	 <!-- this next element effects the proxying of the surrounding bean -->
         <aop:scoped-proxy/>
 	</bean>

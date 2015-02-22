@@ -10,8 +10,9 @@ import com.project.domain.RevenueEntity;
 
 public interface FinanceService {
 	boolean isMonitorStart();
-	BalanceEntity getPreviousPeriodBalance(String username);
+	BalanceEntity getCurrentPeriodBalance(String username);
 	boolean createNewPeriod(BalanceEntity balanceEntity);
 	RevenueEntity addNewRevenue(RevenueEntity revenueEntity);
 	ExpenseEntity addNewExpense(ExpenseEntity revenueEntity);
+	public BigDecimal getBalance(String username);
 }

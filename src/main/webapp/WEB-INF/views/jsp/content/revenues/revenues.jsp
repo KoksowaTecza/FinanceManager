@@ -27,6 +27,7 @@ function addRevenueElement() {
 }
 </script>
 <div>
+<div id="balance">${balance}</div>
 <div class="buttons_grid">
 		<button type="button" class="btn btn-success"
 			onclick="addRevenueElement()">

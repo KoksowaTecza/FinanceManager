@@ -12,4 +12,5 @@ public interface BalanceDao extends GenericDao<BalanceEntity, Long> {
 	public BalanceEntity getCurrentPeriodBalance(String username);
 	public boolean saveIncome(String username, double amount);
 	public boolean saveExpense(String username, double amount);
+	public BigDecimal getBalance(String username);
 }

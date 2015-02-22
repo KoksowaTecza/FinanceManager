@@ -67,6 +67,11 @@ body {
 	color: #efefef;
 }
 
+#menu #userAccountInfo{
+	background: #9C2C1E;
+	font-weight: bold;
+	padding :10px;
+}
 #menu h3 {
 	color: #f6ca19;
 	font-weight: bold;

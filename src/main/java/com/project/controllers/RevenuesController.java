@@ -53,6 +53,7 @@ public class RevenuesController {
 
 	@RequestMapping(value = "/revenues", method = RequestMethod.GET)
 	public String showRevenuesTab(Model model) {
+		model.addAttribute("balance", financeService.getBalance(userSessionObject.getUsername()));
 		return "revenues/revenues";
 	}
 	
@@ -77,6 +78,7 @@ public class RevenuesController {
 			revenueEntity.setUsername(userSessionObject.getUsername());
 			RevenueEntity newRevenue = financeService.addNewRevenue(revenueEntity);
 			logger.warn("Created Revenue Entity");
+			
 			//res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
 		}else {
 			res.setStatus("FAIL");

@@ -103,4 +103,17 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 		return false;
 	}
 
+	@Override
+	public BigDecimal getBalance(String username) {
+		BalanceEntity balanceEnt = getCurrentPeriodBalance(username);
+		BigDecimal result = new BigDecimal("0");
+		BigDecimal income = balanceEnt.getIncome();
+		BigDecimal epenses = balanceEnt.getExpenditure().negate();
+		BigDecimal previousPeriod = balanceEnt.getBalance();
+		
+		result = result.add(income == null?new BigDecimal("0"):income).add(previousPeriod == null?new BigDecimal("0"):previousPeriod).add(epenses == null ? new BigDecimal("0"): epenses);
+		
+		return result;
+	}
+
 }

@@ -2,12 +2,18 @@ package com.project.services.impl;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.project.domain.BalanceEntity;
+import com.project.domain.BalanceSessionObject;
 import com.project.domain.ProfileImage;
 import com.project.domain.UserAccount;
 import com.project.domain.UserSessionObject;
@@ -32,6 +38,7 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 	private ImageService imageService;
 	private ConfigurationDataService configurationDataService;
 	private FinanceService financeService;
+	private BalanceSessionObject balanceSessionObject;
 	
 	/**
 	 * Process user authentication
@@ -56,6 +63,22 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 			ProfileImage image = imageService.getUserProfileImage(user.getProfile_image_name());
 			userSessionObject.setProfile_image(image.getProfile_image());
 			userSessionObject.setMonitorAllert(financeService.isMonitorStart());
+			
+			//setBalanceSessionObject
+			BalanceEntity balanceEntity = financeService.getCurrentPeriodBalance(username);
+			balanceSessionObject.setBalance(financeService.getBalance(username) == null?"0":financeService.getBalance(username).toString());
+			balanceSessionObject.setExpenditure(balanceEntity.getExpenditure() == null? "0":balanceEntity.getExpenditure().toString() );
+			balanceSessionObject.setIncome(balanceEntity.getIncome() == null?"0":balanceEntity.getIncome().toString());
+			String date = "Nie ustalono!";
+			if(balanceEntity.getPeriod_start() != null){
+				SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+				Date periodStart =  balanceEntity.getPeriod_start();
+				date =  ft.format(periodStart);
+			}
+			balanceSessionObject.setPeriod_start(date);
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			Date today =  Calendar.getInstance().getTime(); 
+			balanceSessionObject.setToday(ft.format(today));
 			return true;
 		}catch(AuthenticationException e) {
 			//TO DO set exception
@@ -96,6 +119,10 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
 
 	public void setFinanceService(FinanceService financeService) {
 		this.financeService = financeService;
+	}
+
+	public void setBalanceSessionObject(BalanceSessionObject balanceSessionObject) {
+		this.balanceSessionObject = balanceSessionObject;
 	}
 	
 	
