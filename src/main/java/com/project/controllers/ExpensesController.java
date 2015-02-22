@@ -1,6 +1,8 @@
 package com.project.controllers;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.domain.CategoryExpensesEntity;
 import com.project.domain.CategoryRevenueEntity;
+import com.project.domain.ExpenseEntity;
 import com.project.domain.JsonResponse;
+import com.project.domain.RevenueEntity;
 import com.project.domain.UserSessionObject;
 import com.project.services.CategoryService;
 import com.project.services.ConfigurationDataService;
@@ -28,11 +32,13 @@ import com.project.services.FinanceService;
 public class ExpensesController {
 	private UserSessionObject userSessionObject;
 	private CategoryService categoryService;
+	private FinanceService financeService;
 	
 	@Inject
-	public ExpensesController(UserSessionObject userSessionObject, CategoryService categoryService) {
+	public ExpensesController(UserSessionObject userSessionObject, CategoryService categoryService, FinanceService financeService) {
 		this.userSessionObject = userSessionObject;
 		this.categoryService = categoryService;
+		this.financeService = financeService;
 	}
 	
 	
@@ -40,6 +46,35 @@ public class ExpensesController {
 	public String showHome(Model model) {
 		return "expenses/expenses";
 	}
+	
+	@RequestMapping(value = "/expense", method = RequestMethod.GET, params = "new")
+	public String showRevenueModal(Model model) {
+		Map<String,String> categories = new LinkedHashMap<String,String>();
+		List<CategoryExpensesEntity> categoryList =   categoryService.getAllCategoryExpensesForUser(userSessionObject.getUsername());
+		for(CategoryExpensesEntity category: categoryList){
+			categories.put(Integer.toString(category.getId()), category.getCategory_name());
+		}
+		model.addAttribute("categoryMap", categories);
+		model.addAttribute(new ExpenseEntity());
+		return "expenses/expenses/modal";
+	}
+	
+	@RequestMapping(value = "/expense", method = RequestMethod.POST)
+	public @ResponseBody JsonResponse addRevenueItem(@Valid @ModelAttribute(value = "expenseEntity") ExpenseEntity expenseEntity,
+			BindingResult result, HttpServletRequest request) {
+		JsonResponse res = new JsonResponse();
+		if (!result.hasErrors()) {
+			res.setStatus("SUCCESS");
+			expenseEntity.setUsername(userSessionObject.getUsername());
+			ExpenseEntity newExpense = financeService.addNewExpense(expenseEntity);
+			//res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
+		}else {
+			res.setStatus("FAIL");
+			res.setResult(result.getAllErrors());
+		}
+		return res;
+	}
+	
 	
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String showCategoriesTab(Model model, HttpServletRequest request) {

@@ -13,6 +13,7 @@
 <script src="<c:url value="/app/static/js/jquery-1.11.1.min.js" />"></script>
 <script src="<c:url value="/app/static/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/app/static/js/script.js" />"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>

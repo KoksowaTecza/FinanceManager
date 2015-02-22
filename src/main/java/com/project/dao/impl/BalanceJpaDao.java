@@ -51,7 +51,7 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 	}
 
 	@Override
-	public BalanceEntity getPreviousPeriodBalance(String username) {
+	public BalanceEntity getCurrentPeriodBalance(String username) {
 		Assert.notNull(username);
 		BalanceEntity balance = null;
 		
@@ -63,6 +63,44 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 		}catch(NoResultException e){
 		}
 		return balance;
+	}
+
+	@Override
+	public boolean saveIncome(String username, double amount) {
+		Assert.notNull(username);
+		BalanceEntity balanceEntity = getCurrentPeriodBalance(username);
+		BigDecimal income = balanceEntity.getIncome();
+		if(income != null){
+			income = income.add(new BigDecimal(Double.toString(amount)));
+		}else {
+			income = new BigDecimal(Double.toString(amount));
+		}
+		int id = balanceEntity.getId();
+		String name = getPeristenceClass().getName();
+		Query query = getEntityManager().createQuery("update "+name+" u set u.income = :income where u.id = :id").setParameter("income", income).setParameter("id", id);
+		
+		int result = query.executeUpdate();
+		if(result > 0 )return true;
+		return false;
+	}
+
+	@Override
+	public boolean saveExpense(String username, double amount) {
+		Assert.notNull(username);
+		BalanceEntity balanceEntity = getCurrentPeriodBalance(username);
+		BigDecimal expense = balanceEntity.getExpenditure();
+		if(expense != null){
+			expense = expense.add(new BigDecimal(Double.toString(amount)));
+		}else {
+			expense = new BigDecimal(Double.toString(amount));
+		}
+		int id = balanceEntity.getId();
+		String name = getPeristenceClass().getName();
+		Query query = getEntityManager().createQuery("update "+name+" u set u.expenditure = :expense where u.id = :id").setParameter("expense", expense).setParameter("id", id);
+		
+		int result = query.executeUpdate();
+		if(result > 0 )return true;
+		return false;
 	}
 
 }

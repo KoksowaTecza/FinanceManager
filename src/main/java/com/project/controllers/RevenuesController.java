@@ -1,11 +1,15 @@
 package com.project.controllers;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.domain.CategoryRevenueEntity;
 import com.project.domain.ConfigurationData;
 import com.project.domain.JsonResponse;
+import com.project.domain.RevenueEntity;
+import com.project.domain.RevenueEntity;
 import com.project.domain.UserSessionObject;
 import com.project.services.CategoryService;
 import com.project.services.ConfigurationDataService;
@@ -28,6 +34,8 @@ import com.project.services.FinanceService;
 @Controller
 @RequestMapping(value = "/profile/revenues")
 public class RevenuesController {
+	Logger logger = LoggerFactory.getLogger(RevenuesController.class);
+	
 	private ConfigurationDataService configurationDataService;
 	private UserSessionObject userSessionObject;
 	private FinanceService financeService;
@@ -46,6 +54,35 @@ public class RevenuesController {
 	@RequestMapping(value = "/revenues", method = RequestMethod.GET)
 	public String showRevenuesTab(Model model) {
 		return "revenues/revenues";
+	}
+	
+	@RequestMapping(value = "/revenue", method = RequestMethod.GET, params = "new")
+	public String showRevenueModal(Model model) {
+		Map<String,String> categories = new LinkedHashMap<String,String>();
+		List<CategoryRevenueEntity> categoryList =   categoryService.getAllCategoryRevenuesForUser(userSessionObject.getUsername());
+		for(CategoryRevenueEntity category: categoryList){
+			categories.put(Integer.toString(category.getId()), category.getCategory_name());
+		}
+		model.addAttribute("categoryMap", categories);
+		model.addAttribute(new RevenueEntity());
+		return "revenues/revenues/modal";
+	}
+	
+	@RequestMapping(value = "/revenue", method = RequestMethod.POST)
+	public @ResponseBody JsonResponse addRevenueItem(@Valid @ModelAttribute(value = "revenueEntity") RevenueEntity revenueEntity,
+			BindingResult result, HttpServletRequest request) {
+		JsonResponse res = new JsonResponse();
+		if (!result.hasErrors()) {
+			res.setStatus("SUCCESS");
+			revenueEntity.setUsername(userSessionObject.getUsername());
+			RevenueEntity newRevenue = financeService.addNewRevenue(revenueEntity);
+			logger.warn("Created Revenue Entity");
+			//res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
+		}else {
+			res.setStatus("FAIL");
+			res.setResult(result.getAllErrors());
+		}
+		return res;
 	}
 	
 	

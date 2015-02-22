@@ -75,6 +75,9 @@
             </definition>
          </put-attribute>
 	</definition>
+	<definition name="expenses/expenses/modal"
+		template="/WEB-INF/views/jsp/content/expenses/expensesModal.jsp">
+	</definition>
 	<definition name="expenses/categories"
 		extends="expenses">
 		<put-attribute name="content">
@@ -86,7 +89,7 @@
 	<definition name="expenses/categories/modal" template="/WEB-INF/views/jsp/content/expenses/modalForm.jsp">
 	</definition>
 	
-	
+
 	
 	<definition name="history" extends="base.definition">
 		<put-attribute name="title" value="" />
@@ -123,6 +126,9 @@
                 <put-attribute name="tab" value="/WEB-INF/views/jsp/content/revenues/revenues.jsp" />
             </definition>
          </put-attribute>
+	</definition>
+	<definition name="revenues/revenues/modal"
+		template="/WEB-INF/views/jsp/content/revenues/revenueModal.jsp">
 	</definition>
 	<definition name="revenues/revenues/accountConfiguration"
 		extends="revenues">

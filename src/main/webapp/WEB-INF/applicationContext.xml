@@ -20,6 +20,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 	<bean id="balanceDao" class="com.project.dao.impl.BalanceJpaDao" />
 	<bean id="categoryRevenueDao" class="com.project.dao.impl.CategoryRevenueJpaDao" />
 	<bean id="categoryExpensesDao" class="com.project.dao.impl.CategoryExpensesJpaDao" />
+	<bean id="revenueDao" class="com.project.dao.impl.RevenueJpaDao" />
+	<bean id="expenseDao" class="com.project.dao.impl.ExpenseJpaDao" />
 
 	<bean id="userService" class="com.project.services.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
@@ -39,6 +41,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www
 		<property name="userSessionObject" ref="userSessionObject" />
 		<property name="balanceDao" ref="balanceDao" />
 		<property name="categoryRevenueDao" ref="categoryRevenueDao" />
+		<property name="revenueDao" ref="revenueDao" />
+		<property name="expenseDao" ref="expenseDao" />
 	</bean>
 	
 	
