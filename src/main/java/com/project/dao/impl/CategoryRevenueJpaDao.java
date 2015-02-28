@@ -72,4 +72,6 @@ public class CategoryRevenueJpaDao extends GenericJpaDao<CategoryRevenueEntity, 
 		}
 		return true;
 	}
+	
+	
 }

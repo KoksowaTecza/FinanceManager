@@ -26,6 +26,7 @@ import com.project.domain.ConfigurationData;
 import com.project.domain.JsonResponse;
 import com.project.domain.RevenueEntity;
 import com.project.domain.RevenueEntity;
+import com.project.domain.TransactionPeriodSummary;
 import com.project.domain.UserSessionObject;
 import com.project.services.CategoryService;
 import com.project.services.ConfigurationDataService;
@@ -54,8 +55,17 @@ public class RevenuesController {
 	@RequestMapping(value = "/revenues", method = RequestMethod.GET)
 	public String showRevenuesTab(Model model) {
 		model.addAttribute("balance", financeService.getBalance(userSessionObject.getUsername()));
+		financeService.getRevenouSummaryForCurrentPeriod(userSessionObject.getUsername());
 		return "revenues/revenues";
 	}
+	
+	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	public @ResponseBody List<TransactionPeriodSummary> getSummaryData(Model model) {
+		List<TransactionPeriodSummary> data = financeService.getRevenouSummaryForCurrentPeriod(userSessionObject.getUsername());
+		return data;
+	}
+	
+	
 	
 	@RequestMapping(value = "/revenue", method = RequestMethod.GET, params = "new")
 	public String showRevenueModal(Model model) {

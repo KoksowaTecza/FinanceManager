@@ -14,5 +14,6 @@
         	<class>com.project.domain.CategoryExpensesEntity</class>
         	<class>com.project.domain.RevenueEntity</class>
         	<class>com.project.domain.ExpenseEntity</class>
+        	<class>com.project.domain.ExpenseProjection</class>
         </persistence-unit>
 </persistence>

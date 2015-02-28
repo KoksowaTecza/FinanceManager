@@ -1,17 +1,23 @@
 package com.project.services.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.project.dao.BalanceDao;
 import com.project.dao.CategoryRevenueDao;
 import com.project.dao.ExpenseDao;
+import com.project.dao.ExpenseProjectionDao;
 import com.project.dao.RevenueDao;
 import com.project.domain.BalanceEntity;
 import com.project.domain.BalanceSessionObject;
 import com.project.domain.CategoryRevenueEntity;
 import com.project.domain.ExpenseEntity;
+import com.project.domain.ExpenseProjection;
 import com.project.domain.RevenueEntity;
+import com.project.domain.TransactionPeriodSummary;
 import com.project.domain.UserSessionObject;
 import com.project.services.FinanceService;
 
@@ -22,6 +28,7 @@ public class FinanceServiceImpl implements FinanceService {
 	RevenueDao revenueDao;
 	ExpenseDao expenseDao;
 	BalanceSessionObject balanceSessionObject;
+	ExpenseProjectionDao expenseProjectionDao;
 	
 	@Override
 	public boolean isMonitorStart() {
@@ -113,6 +120,49 @@ public class FinanceServiceImpl implements FinanceService {
 	@Override
 	public BigDecimal getBalance(String username) {
 		return balanceDao.getBalance(username);
+	}
+
+	@Override
+	public List<TransactionPeriodSummary> getRevenouSummaryForPeriod(String username,
+			Date startPeriod, Date endPeriod) {
+		List<TransactionPeriodSummary> list = revenueDao.getRevenueForPeriod(username, startPeriod, endPeriod);
+		return list;
+	}
+
+	@Override
+	public List<TransactionPeriodSummary> getRevenouSummaryForCurrentPeriod(String username) {
+		BalanceEntity balance = getCurrentPeriodBalance(username);
+		Date period_start = balance.getPeriod_start();
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		Date period_end =  Calendar.getInstance().getTime(); 
+		List<TransactionPeriodSummary> list = getRevenouSummaryForPeriod(username,
+				period_start, period_end);
+		return list;
+	}
+
+	@Override
+	public List<TransactionPeriodSummary> getExpenseSummaryForCurrentPeriod(
+			String username) {
+		BalanceEntity balance = getCurrentPeriodBalance(username);
+		Date period_start = balance.getPeriod_start();
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		Date period_end =  Calendar.getInstance().getTime(); 
+		List<TransactionPeriodSummary> list = getExpenseSummaryForPeriod(username,
+				period_start, period_end);
+		return list;
+	}
+
+	@Override
+	public List<TransactionPeriodSummary> getExpenseSummaryForPeriod(
+			String username, Date startPeriod, Date endPeriod) {
+		List<TransactionPeriodSummary> list = expenseDao.getExpenseForPeriod(username, startPeriod, endPeriod);
+		return list;
+	}
+
+	@Override
+	public ExpenseProjection saveExpenseProjection(ExpenseProjection expenseProjection) {
+		ExpenseProjection projection = expenseProjectionDao.save(expenseProjection);
+		return projection;
 	}
 
 

@@ -22,6 +22,7 @@ import com.project.domain.CategoryRevenueEntity;
 import com.project.domain.ExpenseEntity;
 import com.project.domain.JsonResponse;
 import com.project.domain.RevenueEntity;
+import com.project.domain.TransactionPeriodSummary;
 import com.project.domain.UserSessionObject;
 import com.project.services.CategoryService;
 import com.project.services.ConfigurationDataService;
@@ -45,6 +46,28 @@ public class ExpensesController {
 	@RequestMapping(value = "/expenses", method = RequestMethod.GET)
 	public String showHome(Model model) {
 		return "expenses/expenses";
+	}
+	
+	@RequestMapping(value = "/summary", method = RequestMethod.GET)
+	public @ResponseBody List<TransactionPeriodSummary> getSummaryData(Model model) {
+		List<TransactionPeriodSummary> data = financeService.getExpenseSummaryForCurrentPeriod(userSessionObject.getUsername());
+		return data;
+	}
+	
+	@RequestMapping(value = "/expense", method = RequestMethod.POST)
+	public @ResponseBody JsonResponse addExpenseProjection(@Valid @ModelAttribute(value = "expenseEntity") ExpenseEntity expenseEntity,
+			BindingResult result, HttpServletRequest request) {
+		JsonResponse res = new JsonResponse();
+		if (!result.hasErrors()) {
+			res.setStatus("SUCCESS");
+			expenseEntity.setUsername(userSessionObject.getUsername());
+			ExpenseEntity newExpense = financeService.addNewExpense(expenseEntity);
+			//res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
+		}else {
+			res.setStatus("FAIL");
+			res.setResult(result.getAllErrors());
+		}
+		return res;
 	}
 	
 	@RequestMapping(value = "/expense", method = RequestMethod.GET, params = "new")

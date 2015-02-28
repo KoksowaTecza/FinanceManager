@@ -91,7 +91,7 @@
 		var place = $('#place').val();
 		var description = $('#description').val();
 		var id = $('#id').val();
-		var category = $('#category_name').val();
+		var category = $('#category_name_id').val();
 		var transaction_time_string = $("#transaction_time_string").val();
 		var coordLat = $('#coordLat').val();
 		var coordLng = $('#coordLng').val();
@@ -99,7 +99,7 @@
 			type : "POST",
 			url : urlGet,
 			data : "id=" + id + "&amount=" + amount + "&place=" + place
-					+ "&description=" + description + "&category_name="
+					+ "&description=" + description + "&category_name_id="
 					+ category + "&transaction_time_string="
 					+ transaction_time_string+"&coordLat="+coordLat+"&coordLng="+coordLng,
 			success : function(response) {
@@ -161,7 +161,7 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-md-3 control-label">Kategoria:</label>
 						<div class="col-md-5">
-							<sf:select path="category_name" items="${categoryMap}"
+							<sf:select path="category_name_id" items="${categoryMap}"
 								class="form-control" />
 						</div>
 					</div>

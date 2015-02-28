@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.project.commons.domain.BaseEntity;
@@ -25,7 +27,7 @@ public class RevenueEntity extends BaseEntity {
 	
 	private double amount;
 	
-	private Long category_name_id;
+    private Long category_name_id;
 	
 	private String description;
 	
@@ -57,13 +59,6 @@ public class RevenueEntity extends BaseEntity {
 		this.amount = amount;
 	}
 
-	public Long getCategory_name() {
-		return category_name_id;
-	}
-
-	public void setCategory_name(Long category_name) {
-		this.category_name_id = category_name;
-	}
 
 	public String getDescription() {
 		return description;
@@ -106,6 +101,14 @@ public class RevenueEntity extends BaseEntity {
 
 	public void setCoordLng(String coordLng) {
 		this.coordLng = coordLng;
+	}
+
+	public Long getCategory_name_id() {
+		return category_name_id;
+	}
+
+	public void setCategory_name_id(Long category_name_id) {
+		this.category_name_id = category_name_id;
 	}
 	
 	
