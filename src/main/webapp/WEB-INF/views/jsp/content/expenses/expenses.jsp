@@ -30,11 +30,12 @@ function setChartData(response){
 	for(var i = 0; i<response.length; i++){
 		category[i] = response[i].cat_name;
 		amount[i] = response[i].sum;
-		projection[i] = response
+		projection[i] = response[i].projection;
 	}
 	console.log("category "+category);
 	chart.xAxis[0].update({categories:category});
 	chart.series[1].update({data:amount});
+	chart.series[0].update({data:projection});
 }
 
 
@@ -72,7 +73,7 @@ function drawChart(){
 		                            'Dragging <b>' + this.series.name + '</b>, <b>' + this.category + '</b> to <b>' + Highcharts.numberFormat(e.newY, 2) + '</b>');
 		                    },
 		                    drop: function () {
-		                    	
+		                    	addProjectionToCategory(this.category, Highcharts.numberFormat(this.y, 0));
 		                        $('#drop').html(
 		                            'In <b>' + this.series.name + '</b>, <b>' + this.category + '</b> was set to <b>' + Highcharts.numberFormat(this.y, 0) + '</b>');
 		                    }
@@ -106,7 +107,7 @@ function drawChart(){
 }
 
 function addProjectionToCategory(category, amount){
-	var urlGet = "<s:url value='/app/profile/expenses/expense'/>";
+	var urlGet = "<s:url value='/app/profile/expenses/projection/add'/>";
 	$.ajax({
 		type : "POST",
 		url : urlGet,
@@ -114,25 +115,14 @@ function addProjectionToCategory(category, amount){
 		success : function(response) {
 			// we have the response
 			if (response.status == "SUCCESS") {
-				$('#expenseItem').modal('hide');
 				var onlyUrl = window.location.href.replace(
 						window.location.search, '');
 				window.location.replace(onlyUrl + "?success=true");
 			} else {
-				for (i = 0; i < response.result.length; i++) {
-					var errorMessage = response.result[i].defaultMessage;
-					var field = response.result[i].field;
-					$("#" + field).next(".error").remove();
-					$("#" + field).after(
-							" <span class='error'>" + errorMessage
-									+ "</span>");
-				}
 			}
-			$("input").prop('disabled', false);
 		},
 		error : function(e) {
-			$('#dange_message').show();
-			$("input").prop('disabled', false);
+			alert("ERROR");
 		}
 	});
 }

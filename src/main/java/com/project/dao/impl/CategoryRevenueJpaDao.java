@@ -36,12 +36,12 @@ public class CategoryRevenueJpaDao extends GenericJpaDao<CategoryRevenueEntity, 
 	}
 
 	@Override
-	public Integer getCategoryIdByName(String name) {
+	public Long getCategoryIdByName(String name) {
 		Assert.notNull(name);
-		Integer id;
+		Long id;
 		Query query = getEntityManager().createQuery("select x.id from "+ getPeristenceClass().getSimpleName() + " x where x.category_name = :category_name").setParameter("category_name", name);
 		try {
-			id = (Integer) query.getSingleResult();
+			id = (Long) query.getSingleResult();
 		}catch(NoResultException e){
 			return null;
 		}

@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 public class UserSessionObject implements Serializable {
 	private static final long serialVersionUID = 5137032661006129669L;
-	private int id;
+	private Long id;
 	private String userFullName;
 	private String username;
 	private String password;
@@ -41,10 +41,10 @@ public class UserSessionObject implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getProfile_image_name() {

@@ -72,7 +72,7 @@ public class RevenuesController {
 		Map<String,String> categories = new LinkedHashMap<String,String>();
 		List<CategoryRevenueEntity> categoryList =   categoryService.getAllCategoryRevenuesForUser(userSessionObject.getUsername());
 		for(CategoryRevenueEntity category: categoryList){
-			categories.put(Integer.toString(category.getId()), category.getCategory_name());
+			categories.put(Long.toString(category.getId()), category.getCategory_name());
 		}
 		model.addAttribute("categoryMap", categories);
 		model.addAttribute(new RevenueEntity());

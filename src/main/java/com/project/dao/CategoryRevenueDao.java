@@ -10,7 +10,7 @@ import com.project.domain.TransactionPeriodSummary;
 
 public interface CategoryRevenueDao extends GenericDao<CategoryRevenueEntity, String> {
 	public List<CategoryRevenueEntity> getAllCategoryRevenuesForUser(String username);
-	public Integer getCategoryIdByName(String name);
+	public Long getCategoryIdByName(String name);
 	public CategoryRevenueEntity getCategoryByName(String name);
 	public boolean daleteRevenueCategoryByName(String name);
 }

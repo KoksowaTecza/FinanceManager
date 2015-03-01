@@ -7,7 +7,7 @@ import com.project.domain.BalanceEntity;
 import com.project.domain.ConfigurationData;
 
 public interface BalanceDao extends GenericDao<BalanceEntity, Long> {
-	Integer getBalanceIdByUsername(String username);
+	Long getBalanceIdByUsername(String username);
 	boolean isMonitorStart(String username);
 	public BalanceEntity getCurrentPeriodBalance(String username);
 	public boolean saveIncome(String username, double amount);

@@ -18,13 +18,13 @@ public class BaseEntity implements Serializable {
 	private static final long serialVersionUID = -8408390457896092709L;
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

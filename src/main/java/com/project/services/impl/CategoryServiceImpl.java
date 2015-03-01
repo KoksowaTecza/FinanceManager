@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Integer getCategoryRevenueIdByName(String name) {
+	public Long getCategoryRevenueIdByName(String name) {
 		return categoryRevenueDao.getCategoryIdByName(name);
 	}
 
@@ -86,7 +86,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Integer getCategoryExpensesIdByName(String name) {
+	public Long getCategoryExpensesIdByName(String name) {
 		return categoryExpensesDao.getCategoryIdByName(name);
 	}
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.domain.CategoryExpensesEntity;
 import com.project.domain.CategoryRevenueEntity;
 import com.project.domain.ExpenseEntity;
+import com.project.domain.ExpenseProjection;
 import com.project.domain.JsonResponse;
 import com.project.domain.RevenueEntity;
 import com.project.domain.TransactionPeriodSummary;
@@ -54,19 +55,21 @@ public class ExpensesController {
 		return data;
 	}
 	
-	@RequestMapping(value = "/expense", method = RequestMethod.POST)
-	public @ResponseBody JsonResponse addExpenseProjection(@Valid @ModelAttribute(value = "expenseEntity") ExpenseEntity expenseEntity,
-			BindingResult result, HttpServletRequest request) {
+	@RequestMapping(value = "/projection/add", method = RequestMethod.POST)
+	public @ResponseBody JsonResponse addExpenseProjection (HttpServletRequest request) {
+		String category_name = request.getParameter("category_name");
+		Double amount = Double.parseDouble(request.getParameter("amount").replaceAll("\\s+",""));
+		if(category_name == null && amount == null)
+			return null;
+		Long category_id = categoryService.getCategoryExpensesIdByName(category_name);
+		Long balance_id = financeService.getCurrentPeriodBalance(userSessionObject.getUsername()).getId();
+		ExpenseProjection expenseProjection = new ExpenseProjection();
+		expenseProjection.setAmount(amount);
+		expenseProjection.setCategory_name_id(category_id);
+		expenseProjection.setUser_balance_id(balance_id);
+		financeService.saveExpenseProjection(expenseProjection);
 		JsonResponse res = new JsonResponse();
-		if (!result.hasErrors()) {
-			res.setStatus("SUCCESS");
-			expenseEntity.setUsername(userSessionObject.getUsername());
-			ExpenseEntity newExpense = financeService.addNewExpense(expenseEntity);
-			//res.setResult(categoryService.careateNewRevenueCategory(categoryRevenueEntity));
-		}else {
-			res.setStatus("FAIL");
-			res.setResult(result.getAllErrors());
-		}
+		res.setStatus("SUCCESS");
 		return res;
 	}
 	
@@ -75,7 +78,7 @@ public class ExpensesController {
 		Map<String,String> categories = new LinkedHashMap<String,String>();
 		List<CategoryExpensesEntity> categoryList =   categoryService.getAllCategoryExpensesForUser(userSessionObject.getUsername());
 		for(CategoryExpensesEntity category: categoryList){
-			categories.put(Integer.toString(category.getId()), category.getCategory_name());
+			categories.put(Long.toString(category.getId()), category.getCategory_name());
 		}
 		model.addAttribute("categoryMap", categories);
 		model.addAttribute(new ExpenseEntity());

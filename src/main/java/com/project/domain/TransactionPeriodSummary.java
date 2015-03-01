@@ -6,6 +6,7 @@ public class TransactionPeriodSummary {
 	private BigDecimal cat_id;
 	private String cat_name;
 	private BigDecimal sum;
+	private double projection;
 	public BigDecimal getCat_id() {
 		return cat_id;
 	}
@@ -23,6 +24,12 @@ public class TransactionPeriodSummary {
 	}
 	public void setSum(BigDecimal sum) {
 		this.sum = sum;
+	}
+	public double getProjection() {
+		return projection;
+	}
+	public void setProjection(double projection) {
+		this.projection = projection;
 	}
 	
 

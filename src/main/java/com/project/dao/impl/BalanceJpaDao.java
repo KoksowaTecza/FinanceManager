@@ -21,14 +21,14 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 	}
 
 	@Override
-	public Integer getBalanceIdByUsername(String username) {
+	public Long getBalanceIdByUsername(String username) {
 		Assert.notNull(username);
-		Integer id = null;
+		Long id = null;
 		String name = getPeristenceClass().getName();
 		Query query = getEntityManager().createQuery("select u.id from " + name + " u where u.username = :username and u.period_end is null").setParameter("username", username);
 		
 		try {
-			id = (Integer)query.getSingleResult();
+			id = (Long)query.getSingleResult();
 		}catch(NoResultException e){
 			//do nothing
 		}
@@ -75,7 +75,7 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 		}else {
 			income = new BigDecimal(Double.toString(amount));
 		}
-		int id = balanceEntity.getId();
+		Long id = balanceEntity.getId();
 		String name = getPeristenceClass().getName();
 		Query query = getEntityManager().createQuery("update "+name+" u set u.income = :income where u.id = :id").setParameter("income", income).setParameter("id", id);
 		
@@ -94,7 +94,7 @@ public class BalanceJpaDao extends  GenericJpaDao<BalanceEntity, Long> implement
 		}else {
 			expense = new BigDecimal(Double.toString(amount));
 		}
-		int id = balanceEntity.getId();
+		Long id = balanceEntity.getId();
 		String name = getPeristenceClass().getName();
 		Query query = getEntityManager().createQuery("update "+name+" u set u.expenditure = :expense where u.id = :id").setParameter("expense", expense).setParameter("id", id);
 		

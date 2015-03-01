@@ -128,6 +128,7 @@ public class FinanceServiceImpl implements FinanceService {
 		List<TransactionPeriodSummary> list = revenueDao.getRevenueForPeriod(username, startPeriod, endPeriod);
 		return list;
 	}
+	
 
 	@Override
 	public List<TransactionPeriodSummary> getRevenouSummaryForCurrentPeriod(String username) {
@@ -149,6 +150,14 @@ public class FinanceServiceImpl implements FinanceService {
 		Date period_end =  Calendar.getInstance().getTime(); 
 		List<TransactionPeriodSummary> list = getExpenseSummaryForPeriod(username,
 				period_start, period_end);
+		List<ExpenseProjection> list2 = expenseProjectionDao.getProjectionForPeriod(balance.getId());
+		for(TransactionPeriodSummary summary : list){
+			for(ExpenseProjection projection : list2){
+				if(summary.getCat_id().longValue() == projection.getCategory_name_id()){
+					summary.setProjection(projection.getAmount());
+				}
+			}
+		}
 		return list;
 	}
 
@@ -161,8 +170,23 @@ public class FinanceServiceImpl implements FinanceService {
 
 	@Override
 	public ExpenseProjection saveExpenseProjection(ExpenseProjection expenseProjection) {
-		ExpenseProjection projection = expenseProjectionDao.save(expenseProjection);
+		Long projectionId = expenseProjectionDao.checkIfProjectionExist(expenseProjection.getUser_balance_id(), expenseProjection.getCategory_name_id());
+		ExpenseProjection projection = null;
+		if(projectionId == null)
+			projection = expenseProjectionDao.save(expenseProjection);
+		else{
+			expenseProjection.setId(projectionId);
+			expenseProjectionDao.update(expenseProjection);
+		}
 		return projection;
+	}
+
+	public ExpenseProjectionDao getExpenseProjectionDao() {
+		return expenseProjectionDao;
+	}
+
+	public void setExpenseProjectionDao(ExpenseProjectionDao expenseProjectionDao) {
+		this.expenseProjectionDao = expenseProjectionDao;
 	}
 
 

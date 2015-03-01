@@ -37,7 +37,7 @@ public class ConfigurationDataServiceImpl implements ConfigurationDataService {
 	@Override
 	public boolean updateConfigurationData(ConfigurationData configurationData, BalanceEntity balanceEntity) {
 		configurationDao.update(configurationData);
-		Integer id = balanceDao.getBalanceIdByUsername(balanceEntity.getUsername());
+		Long id = balanceDao.getBalanceIdByUsername(balanceEntity.getUsername());
 		balanceEntity.setId(id);
 		balanceDao.update(balanceEntity);
 		return true;
